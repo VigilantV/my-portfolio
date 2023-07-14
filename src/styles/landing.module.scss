@@ -1,0 +1,135 @@
+@use "../styles/global/variables" as *;
+@use "../styles/global/mixins" as *;
+
+.rotating {
+  position: absolute;
+  top: -50vw;
+  left: -25vw;
+  width: 150vw;
+  height: 150vw;
+  z-index: -5;
+
+  &_inner {
+    @extend .rotating;
+    @include animation("rotate 30s infinite linear");
+  }
+
+  &_outer {
+    @extend .rotating;
+    @include animation("rotate 80s infinite linear");
+  }
+}
+
+@include keyframes(rotate) {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.intro {
+  margin: 15vw 0 0 25vw;
+}
+
+.greeting_text {
+  font-size: 1.3vw;
+  letter-spacing: 0.1vw;
+  color: $blue;
+}
+
+.name {
+  display: inline-block;
+  font-size: 5vw;
+  letter-spacing: -0.1vw;
+  margin-left: -0.2vw;
+  color: $darkBlue;
+  cursor: crosshair;
+}
+
+.profession {
+  font-size: 5vw;
+  font-weight: bold;
+  color: $darkBlue;
+  margin-left: -4.5vw;
+
+  p {
+    display: inline-block;
+    font-family: calibri;
+  }
+}
+
+.fire {
+  @include flame();
+  animation: flame 0.5s ease-in-out infinite alternate;
+}
+
+.burn {
+  @include flame();
+  animation: flame 0.8s ease-out infinite alternate;
+}
+
+.dash {
+  display: inline-block;
+  width: 1.5vw;
+  height: 0.5vw;
+  border-radius: 0.2vw;
+  margin: 0 0.5vw 1vw;
+  background-color: $darkBlue;
+}
+
+.lazer {
+  position: absolute;
+  top: 43vw;
+  left: -10vw;
+  width: 10vw;
+  height: 0.3vw;
+  border-radius: 50%;
+  background: linear-gradient(to right, #22eeff, #fff, #22eeff, #fff, #22eeff);
+}
+
+.chevron_button {
+  width: 2.2vw;
+  height: 5vw;
+  margin-top: 11vw;
+  margin-left: 48.9vw;
+  transform: scale(0);
+  cursor: pointer;
+}
+
+.chevron {
+  @include chevron_button();
+}
+
+.is_typing {
+  position: absolute;
+  top: 35vw;
+  left: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 1.35vw;
+  color: $darkBlue;
+
+  p {
+    border-right: 0.15vw solid transparent;
+    padding-right: 0.2vw;
+  }
+}
+
+.text_box {
+  @include messagePopUP(absolute, #cbf2ffc8);
+  top: -10vw;
+  left: 38vw;
+
+  box-shadow: 0.5vw -0.3vw 0.8vw #0e0e52b0;
+
+  p {
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      scale: (1.1);
+    }
+  }
+}
