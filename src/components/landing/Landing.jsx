@@ -21,7 +21,7 @@ const Landing = () => {
   const landingAnimationRef = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 720);
   }, []);
 
   document.addEventListener("wheel", () => {
@@ -123,9 +123,9 @@ const Landing = () => {
         onClick={() => {
           document
             .querySelector(":root")
-            .style.setProperty("--scroll", "scroll");
+            .style.setProperty("--scroll-behavior", "scroll");
           document
-            .getElementById("projects")
+            .getElementById("projects_section")
             .scrollIntoView({ behavior: "smooth" });
           setTimeout(() => {
             setShowIsTyping(false);

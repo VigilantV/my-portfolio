@@ -4,7 +4,7 @@ const headerRevealAnimation = (animationRef) => {
   let ctx = gsap.context(() => {
     var tl = gsap.timeline({
       defaults: {
-        delay: 0.7,
+        delay: 0.4,
         duration: 0.7,
         ease: Elastic.easeOut.config(1.6, 2),
         stagger: 0.3,

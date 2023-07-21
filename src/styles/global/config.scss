@@ -1,7 +1,7 @@
 @use "../global/variables" as *;
 
 :root {
-  --scroll: hidden;
+  --scroll-behavior: hidden;
 }
 
 * {
@@ -12,11 +12,12 @@
 }
 
 body {
+  user-select: none;
+  // overflow-x: hidden;
+  // overflow-y: var(--scroll-behavior);
   background-color: #fdf2fc;
-  overflow-x: hidden;
-  overflow-y: var(--scroll);
 }
 
 ::-webkit-scrollbar {
-  width: 0.7vw;
+  display: none;
 }

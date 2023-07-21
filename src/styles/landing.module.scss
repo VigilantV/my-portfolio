@@ -2,7 +2,7 @@
 @use "../styles/global/mixins" as *;
 
 .rotating {
-  position: absolute;
+  position: fixed;
   top: -50vw;
   left: -25vw;
   width: 150vw;
