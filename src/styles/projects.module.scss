@@ -1,0 +1,127 @@
+@use "../styles/global/variables" as *;
+@use "../styles/global/mixins" as *;
+
+.section {
+  padding: 3vw 0;
+}
+
+.title {
+  font-size: 5vw;
+  font-weight: 400;
+  font-family: calibri;
+  text-align: center;
+  margin-bottom: 5vw;
+  color: $darkBlue;
+}
+
+.projects {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10vw;
+}
+
+.vertical_titles {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: start;
+  height: 30vw;
+  width: 26vw;
+  padding-left: 1vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  cursor: s-resize;
+}
+
+.project {
+  height: 6vw;
+  flex: none;
+  font-size: 1.5vw;
+  padding-top: 1.5vw;
+  opacity: 0.5;
+}
+
+.project_title {
+  padding-left: 0.3vw;
+  color: $darkBlue;
+  transition-property: transform, font-size, opacity;
+  transition-duration: 0.6s;
+  @include linearShine();
+}
+
+.project_images {
+  position: relative;
+  width: 50vw;
+  height: 30vw;
+}
+
+.project_img_1 {
+  position: absolute;
+  top: -1vw;
+  left: 10vw;
+  width: 45vw;
+  height: 26vw;
+  border-radius: 0.7vw;
+}
+
+.project_img_2 {
+  position: absolute;
+  top: 16vw;
+  left: -2vw;
+  width: 22vw;
+  height: 13vw;
+  border-radius: 0.7vw;
+  z-index: 5;
+}
+
+.layer_1 {
+  position: absolute;
+  top: -1vw;
+  left: 10vw;
+  width: 45vw;
+  height: 26vw;
+  transition: 0.5s;
+  border-radius: 0.7vw;
+}
+
+.website_url {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  font-size: 2.2vw;
+  font-weight: 500;
+  text-decoration: none;
+  color: #ff006a;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: 0.5s;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 0;
+    height: 0.2vw;
+    background: #ff006a;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  &:hover {
+    &:after {
+      width: 100%;
+      left: 0;
+    }
+  }
+}
+
+.layer_2 {
+  position: absolute;
+  top: 16vw;
+  left: -2vw;
+  width: 22vw;
+  height: 13vw;
+  border-radius: 0.7vw;
+  transition: 0.5s;
+  z-index: 5;
+}
