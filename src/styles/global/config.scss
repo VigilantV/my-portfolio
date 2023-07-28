@@ -13,9 +13,14 @@
 
 body {
   user-select: none;
-  // overflow-x: hidden;
-  // overflow-y: var(--scroll-behavior);
-  background-color: #fdf2fc;
+  overflow-x: hidden;
+  overflow-y: var(--scroll-behavior);
+  background-color: $whitish;
+}
+
+.toastify_style {
+  width: 25vw;
+  font-size: 1.2vw;
 }
 
 ::-webkit-scrollbar {

@@ -1,10 +1,18 @@
-$smokyWhite: #f2f2f2;
-$cloudy: #ececec;
-$gray: #9194a2;
+$whitish: #fdf2fc;
+$fadeWhitish: #fdf2fcbb;
+$paleBlue: #ccfbfe;
 $lightBlue: #0098ff;
 $blue: #5267df;
 $darkBlue: #0e0e52;
+$fadeDarkBlue: #0e0e52a5;
+$lightRouge: #ff0066;
+$rouge: #ad0045;
 
-.color_template {
-  color: #8c92ac, #0e0e52, #ccfbfe;
+:export {
+  whitish: $whitish;
+  paleBlue: $paleBlue;
+  lightBlue: $lightBlue;
+  fadeDarkBlue: $fadeDarkBlue;
+  lightRouge: $lightRouge;
+  rouge: $rouge;
 }
