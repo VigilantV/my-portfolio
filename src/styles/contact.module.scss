@@ -1,0 +1,106 @@
+@use "../styles/global/variables" as *;
+@use "../styles/global/mixins" as *;
+
+.resume_btn {
+  position: absolute;
+  font-size: 1.6vw;
+  top: 101.8vw;
+  left: 50vw;
+  color: $lightRouge;
+  transform: rotate(-5deg);
+  transition: transform 0.5s ease-out;
+
+  &:hover {
+    padding: 0 3.5vw 2vw 0;
+    transform: translateX(-3.5vw) translateY(-1.8vw) rotate(0);
+  }
+}
+
+.contact_section {
+  display: flex;
+  justify-content: space-between;
+  height: 37vw;
+  padding-top: 9vw;
+  background-color: $darkBlue;
+  clip-path: polygon(0 0, 50% 8vw, 100% 0, 100% 100%, 0 100%);
+}
+
+.input_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5vw;
+  margin-left: 15vw;
+  caret-color: $lightRouge;
+}
+
+.question {
+  font-size: 1.2vw;
+  color: $whitish;
+}
+
+.text_area {
+  width: 20vw;
+  height: 8vw;
+  font-size: 1.2vw;
+  font-family: calibri;
+  padding: 0.8vw;
+  margin-top: 0.8vw;
+  border: 0.1vw solid $lightBlue;
+  border-radius: 0.5vw;
+  background-color: $whitish;
+  color: $darkBlue;
+  resize: none;
+
+  &::placeholder {
+    color: $darkBlue;
+    font-size: 1.2vw;
+  }
+
+  &:focus {
+    outline: none;
+    border-width: 0.15vw;
+  }
+}
+
+.icons_section {
+  position: relative;
+  margin-right: 32vw;
+}
+
+.icon {
+  position: absolute;
+  top: 12vw;
+  width: 3.2vw;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 3px -3px 6px $lightRouge;
+  }
+}
+
+.telegram {
+  @extend .icon;
+  animation: orbit 15s linear infinite;
+}
+
+.whatsapp {
+  @extend .icon;
+  animation: orbit 15s linear 5s infinite;
+  border-bottom-left-radius: 0 !important;
+}
+
+.linkedin {
+  @extend .icon;
+  animation: orbit 15s linear 10s infinite;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(8vw) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(8vw) rotate(-360deg);
+  }
+}
