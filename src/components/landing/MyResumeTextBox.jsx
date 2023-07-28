@@ -15,7 +15,7 @@ const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
 
   useEffect(() => {
     if (showMyResume) {
-      let ctx = resumeTextBoxAnimation(landingAnimationRef);
+      const ctx = resumeTextBoxAnimation(landingAnimationRef);
       return () => ctx.revert();
     }
   }, [showMyResume]);

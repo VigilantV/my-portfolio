@@ -28,7 +28,7 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
 
   useEffect(() => {
     if (isTypingStart) {
-      let ctx = isTypingAnimation(textId, landingAnimationRef);
+      const ctx = isTypingAnimation(textId, landingAnimationRef);
       return () => ctx.revert();
     }
   }, [textId, isTypingStart]);

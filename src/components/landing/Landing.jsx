@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import IsTyping from "./IsTypingText";
 import MyResumeTextBox from "./MyResumeTextBox";
 import headerRevealAnimation from "../../animations/headerRevealAnimation";
-import nameHoverAnimation from "../../animations/nameHoverAnimation";
 import dashAnimation from "../../animations/dashAnimation";
 
 import classes from "../../styles/landing.module.scss";
@@ -18,10 +17,12 @@ const Landing = () => {
 
   const [showIsTyping, setShowIsTyping] = useState(true);
 
+  const [isChevronClickable, setIsChevronClickable] = useState(false);
+
   const landingAnimationRef = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 720);
+    window.scrollTo(0, 0);
   }, []);
 
   document.addEventListener("wheel", () => {
@@ -35,17 +36,18 @@ const Landing = () => {
   });
 
   useEffect(() => {
-    let ctx1 = headerRevealAnimation(landingAnimationRef);
-    let ctx2 = nameHoverAnimation(landingAnimationRef);
+    const ctx = headerRevealAnimation(landingAnimationRef);
     return () => {
-      ctx1.revert();
-      ctx2.revert();
+      ctx.revert();
     };
   }, []);
 
   useEffect(() => {
     if (showScrollAnimation) {
-      let ctx = dashAnimation(landingAnimationRef);
+      const ctx = dashAnimation(landingAnimationRef);
+      setTimeout(() => {
+        setIsChevronClickable(true);
+      }, 14000);
       return () => ctx.revert();
     }
   }, [showScrollAnimation]);
@@ -63,7 +65,7 @@ const Landing = () => {
         if (i === 9) {
           clearInterval(turnOn);
         }
-      }, 100);
+      }, 130);
     } else {
       i = 9;
       turnOff = setInterval(() => {
@@ -72,7 +74,7 @@ const Landing = () => {
         if (i === -1) {
           clearInterval(turnOff);
         }
-      }, 80);
+      }, 90);
     }
     return () => {
       clearInterval(turnOn);
@@ -121,15 +123,17 @@ const Landing = () => {
         id="chevron"
         className={classes.chevron_button}
         onClick={() => {
-          document
-            .querySelector(":root")
-            .style.setProperty("--scroll-behavior", "scroll");
-          document
-            .getElementById("projects_section")
-            .scrollIntoView({ behavior: "smooth" });
-          setTimeout(() => {
-            setShowIsTyping(false);
-          }, 500);
+          if (isChevronClickable) {
+            document
+              .querySelector(":root")
+              .style.setProperty("--scroll-behavior", "scroll");
+            document
+              .getElementById("projects_section")
+              .scrollIntoView({ behavior: "smooth" });
+            setTimeout(() => {
+              setShowIsTyping(false);
+            }, 400);
+          }
         }}
       >
         <div className={classes.chevron}></div>
