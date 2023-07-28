@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 let animation_1, animation_2, animation_3;
 
 const projectImageAnimation = (animationRef) => {
-  const images = ["#project_img_1", "#project_img_2"];
+  const images = ["#primary_image", "#secondary_image"];
   const ctx = gsap.context(() => {
     animation_1 = gsap
       .timeline()

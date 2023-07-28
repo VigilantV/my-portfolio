@@ -1,8 +1,8 @@
 import { Elastic, gsap } from "gsap";
 
 const resumeTextBoxAnimation = (animationRef) => {
-  let ctx = gsap.context(() => {
-    var tl = gsap.timeline();
+  const ctx = gsap.context(() => {
+    const tl = gsap.timeline();
     tl.to("#my_resume", {
       y: "40vw",
       duration: 0.5,

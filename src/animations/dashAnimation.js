@@ -4,8 +4,8 @@ import { CustomEase } from "gsap/CustomEase";
 gsap.registerPlugin(CustomEase);
 
 const dashAnimation = (animationRef) => {
-  let ctx = gsap.context(() => {
-    var tl = gsap.timeline({
+  const ctx = gsap.context(() => {
+    const tl = gsap.timeline({
       defaults: {
         duration: 1,
         ease: CustomEase.create(

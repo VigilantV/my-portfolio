@@ -1,8 +1,8 @@
 import { Elastic, gsap } from "gsap";
 
 const headerRevealAnimation = (animationRef) => {
-  let ctx = gsap.context(() => {
-    var tl = gsap.timeline({
+  const ctx = gsap.context(() => {
+    const tl = gsap.timeline({
       defaults: {
         delay: 0.4,
         duration: 0.7,

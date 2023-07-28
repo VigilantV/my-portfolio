@@ -1,8 +1,8 @@
 import { gsap } from "gsap";
 
 const isTypingAnimation = (textId, animationRef) => {
-  let ctx = gsap.context(() => {
-    var tl = gsap.timeline({
+  const ctx = gsap.context(() => {
+    const tl = gsap.timeline({
       defaults: {
         duration: 0.3,
         repeatDelay: 0.2,
@@ -14,7 +14,7 @@ const isTypingAnimation = (textId, animationRef) => {
     tl.fromTo(
       textId,
       { borderRightColor: "transparent" },
-      { borderRightColor: "#0098ff" }
+      { borderRightColor: window.lightBlue }
     ).set(textId, { delay: 4.5, border: "none" });
   }, animationRef);
 

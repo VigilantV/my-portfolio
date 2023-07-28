@@ -5,7 +5,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
-  let ctx = gsap.context(() => {
+  const ctx = gsap.context(() => {
     const projectSection = document.getElementById("vertical_titles");
     const projects = document.querySelectorAll("#project");
 
