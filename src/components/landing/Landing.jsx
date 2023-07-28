@@ -47,7 +47,7 @@ const Landing = () => {
       const ctx = dashAnimation(landingAnimationRef);
       setTimeout(() => {
         setIsChevronClickable(true);
-      }, 14000);
+      }, 13200);
       return () => ctx.revert();
     }
   }, [showScrollAnimation]);
