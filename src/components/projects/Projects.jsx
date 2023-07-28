@@ -20,22 +20,37 @@ const Projects = () => {
 
   const [clickedBtnIndex, setClickedBtnIndex] = useState(-1);
 
-  const [image_1, setImage_1] = useState(null);
-  const [image_2, setImage_2] = useState(null);
+  const [primaryImage, setPrimaryImage] = useState(null);
+  const [secondaryImage, setSecondaryImage] = useState(null);
   const [websiteUrl, setWebsiteUrl] = useState("");
   const [onHoverLayer, setOnHoverLayer] = useState(false);
   const [isDuringAnimation, setIsDuringAnimation] = useState(false);
 
+  const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
+
   const projectsAnimationRef = useRef(null);
 
+  const projectsVerticalScrollHandler = () => {
+    if (Math.abs(currentWidth - window.innerWidth) > 300) {
+      setCurrentWidth(window.innerWidth);
+    }
+  };
+
   useEffect(() => {
-    let ctx1 = verticalScrollAnimation(projectsAnimationRef, setTitlesOnShow);
-    let ctx2 = projectImageAnimation(projectsAnimationRef);
+    window.addEventListener("resize", projectsVerticalScrollHandler);
+    return () => {
+      window.removeEventListener("resize", projectsVerticalScrollHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    const ctx1 = verticalScrollAnimation(projectsAnimationRef, setTitlesOnShow);
+    const ctx2 = projectImageAnimation(projectsAnimationRef);
     return () => {
       ctx1.revert();
       ctx2.revert();
     };
-  }, []);
+  }, [currentWidth]);
 
   return (
     <div
@@ -56,7 +71,9 @@ const Projects = () => {
                       : "translateX(0) scale(1)",
                   cursor: titlesOnShow[i] ? "pointer" : null,
                   borderLeft:
-                    clickedBtnIndex === i ? "0.2vw solid #e31b6d" : null,
+                    clickedBtnIndex === i
+                      ? `0.2vw solid ${window.lightRouge}`
+                      : null,
                 }}
                 className={classes.project_title}
                 onMouseEnter={() => {
@@ -83,8 +100,8 @@ const Projects = () => {
                     ].restart();
 
                     setTimeout(() => {
-                      setImage_1(project.img);
-                      setImage_2(project.img);
+                      setPrimaryImage(project.primaryImage);
+                      setSecondaryImage(project.secondaryImage);
                       setWebsiteUrl(project.url);
                     }, 500);
                     if (clickedBtnIndex === -1) {
@@ -107,15 +124,15 @@ const Projects = () => {
             style={{
               visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
             }}
-            id="project_img_1"
-            src={image_1}
-            className={classes.project_img_1}
+            id="primary_image"
+            src={primaryImage}
+            className={classes.primary_image}
           />
           <div
             style={{
               visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
               backgroundColor:
-                onHoverLayer && !isDuringAnimation ? "#0e0e5299" : null,
+                onHoverLayer && !isDuringAnimation ? window.fadeDarkBlue : null,
             }}
             className={classes.layer_1}
             onMouseEnter={() => {
@@ -125,30 +142,42 @@ const Projects = () => {
               setOnHoverLayer(false);
             }}
           >
-            <a
-              style={{
-                bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
-                opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
-              }}
-              href={websiteUrl}
-              className={classes.website_url}
-            >
-              visit website
-            </a>
+            {websiteUrl === "" ? (
+              <p
+                style={{
+                  bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
+                  opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
+                }}
+                className={classes.website_url}
+              >
+                visit website
+              </p>
+            ) : (
+              <a
+                style={{
+                  bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
+                  opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
+                }}
+                href={websiteUrl}
+                className={classes.website_url}
+              >
+                visit website
+              </a>
+            )}
           </div>
           <img
             style={{
               visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
             }}
-            id="project_img_2"
-            src={image_2}
-            className={classes.project_img_2}
+            id="secondary_image"
+            src={secondaryImage}
+            className={classes.secondary_image}
           />
           <div
             style={{
               visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
               backgroundColor:
-                onHoverLayer && !isDuringAnimation ? "#0e0e5299" : null,
+                onHoverLayer && !isDuringAnimation ? window.fadeDarkBlue : null,
             }}
             className={classes.layer_2}
             onMouseEnter={() => {

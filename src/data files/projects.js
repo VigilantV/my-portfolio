@@ -1,67 +1,55 @@
-import proj_1 from "../images/temp/1.jpg";
-import proj_2 from "../images/temp/2.jpg";
-import proj_3 from "../images/temp/3.jpg";
-import proj_4 from "../images/temp/4.jpg";
-import proj_5 from "../images/temp/5.jpg";
-import proj_6 from "../images/temp/6.jpg";
-import proj_7 from "../images/temp/7.jpg";
-import proj_8 from "../images/temp/8.jpg";
-import proj_9 from "../images/temp/9.jpg";
+import comingSoon1 from "../images/projects/coming_soon_1.jpg";
+import comingSoon2 from "../images/projects/coming_soon_2.jpg";
+import proj_3_primary from "../images/projects/proj_3_primary.jpg";
+import proj_3_secondary from "../images/projects/proj_3_secondary.jpg";
 
 const projects = [
   {
     title: "",
-    img: "",
+    primaryImage: "",
+    secondaryImage: "",
     url: "",
   },
   {
     title: "Delta System",
-    img: proj_1,
+    primaryImage: comingSoon1,
+    secondaryImage: comingSoon2,
     url: "",
   },
   {
     title: "Online Institute",
-    img: proj_2,
+    primaryImage: comingSoon1,
+    secondaryImage: comingSoon2,
     url: "",
   },
   {
     title: "Construction Company",
-    img: proj_3,
-    url: "",
+    primaryImage: proj_3_primary,
+    secondaryImage: proj_3_secondary,
+    url: "https://vigilantv.github.io/construction-company/",
   },
   {
     title: "SiteScan",
-    img: proj_4,
+    primaryImage: comingSoon1,
+    secondaryImage: comingSoon2,
     url: "",
   },
   {
     title: "Audit Platform",
-    img: proj_5,
+    primaryImage: comingSoon1,
+    secondaryImage: comingSoon2,
     url: "",
   },
   {
     title: "Algo Website",
-    img: proj_6,
-    url: "",
-  },
-  {
-    title: "temp_1",
-    img: proj_7,
-    url: "",
-  },
-  {
-    title: "temp_2",
-    img: proj_8,
-    url: "",
-  },
-  {
-    title: "temp_3",
-    img: proj_9,
+    primaryImage: comingSoon1,
+    secondaryImage: comingSoon2,
     url: "",
   },
   {
     title: "",
-    img: "",
+    primaryImage: "",
+    secondaryImage: "",
     url: "",
   },
 ];

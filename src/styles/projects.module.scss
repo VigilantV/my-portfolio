@@ -2,7 +2,7 @@
 @use "../styles/global/mixins" as *;
 
 .section {
-  padding: 3vw 0;
+  padding: 3vw 0 5vw;
 }
 
 .title {
@@ -55,7 +55,7 @@
   height: 30vw;
 }
 
-.project_img_1 {
+.primary_image {
   position: absolute;
   top: -1vw;
   left: 10vw;
@@ -64,7 +64,7 @@
   border-radius: 0.7vw;
 }
 
-.project_img_2 {
+.secondary_image {
   position: absolute;
   top: 16vw;
   left: -2vw;
@@ -91,28 +91,11 @@
   font-size: 2.2vw;
   font-weight: 500;
   text-decoration: none;
-  color: #ff006a;
+  color: $lightRouge;
   opacity: 0;
   transform: translateX(-50%);
   transition: 0.5s;
-
-  &:after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    display: block;
-    width: 0;
-    height: 0.2vw;
-    background: #ff006a;
-    transition: width 0.3s ease, left 0.3s ease;
-  }
-
-  &:hover {
-    &:after {
-      width: 100%;
-      left: 0;
-    }
-  }
+  @include underline();
 }
 
 .layer_2 {
