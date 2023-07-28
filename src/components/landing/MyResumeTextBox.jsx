@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import resumeTextBoxAnimation from "../../animations/resumeTextBoxAnimation";
+import downloadFile from "../common/downloadFile";
 
 import classes from "../../styles/landing.module.scss";
 
@@ -22,7 +23,7 @@ const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
 
   return (
     <div id="my_resume" className={classes.text_box}>
-      <p>my resume</p>
+      <p onClick={downloadFile}>my resume</p>
     </div>
   );
 };

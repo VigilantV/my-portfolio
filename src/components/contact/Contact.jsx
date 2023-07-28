@@ -1,10 +1,10 @@
 import { useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
 import { Button } from "@mui/material";
-import { toast } from "react-toastify";
 
 import TextFieldTemplate from "./TextFieldTemplate";
 import textShiveringAnimation from "../../animations/textShiveringAnimation";
+import downloadFile from "../common/downloadFile";
+import sendEmail from "./sendEmail";
 
 import classes from "../../styles/contact.module.scss";
 import telegram from "../../images/icons/telegram.png";
@@ -12,47 +12,9 @@ import whatsapp from "../../images/icons/whatsapp.png";
 import linkedin from "../../images/icons/linkedin.png";
 
 const Contact = () => {
-  const form = useRef();
+  const formRef = useRef();
 
   const contactAnimationRef = useRef(null);
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_cu34nko",
-        "template_qmzuo3s",
-        form.current,
-        "mun2Y_GUgMsZ0vy8s"
-      )
-      .then(
-        () => {
-          toast.success("Your Email has been received successfully.", {
-            position: toast.POSITION.TOP_LEFT,
-            autoClose: 12000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-            className: "toastify_style",
-          });
-        },
-        () => {
-          toast.error("Unfortunately, your email was not sent.", {
-            position: toast.POSITION.TOP_LEFT,
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-            className: "toastify_style",
-          });
-        }
-      );
-    e.target.reset();
-  };
 
   useEffect(() => {
     let ctx = textShiveringAnimation(contactAnimationRef);
@@ -64,12 +26,20 @@ const Contact = () => {
   return (
     <>
       <div className={classes.resume_btn}>
-        <p ref={contactAnimationRef} style={{ cursor: "pointer" }}>
+        <p
+          ref={contactAnimationRef}
+          style={{ cursor: "pointer" }}
+          onClick={downloadFile}
+        >
           my resume
         </p>
       </div>
       <div className={classes.contact_section}>
-        <form ref={form} className={classes.input_section} onSubmit={sendEmail}>
+        <form
+          ref={formRef}
+          className={classes.input_section}
+          onSubmit={(e) => sendEmail(e, formRef)}
+        >
           <p className={classes.question}>
             Have a question or wanna get in touch ?
           </p>
