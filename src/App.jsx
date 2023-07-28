@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import UseScrollToTop from "./components/useScrollToTop";
+import UseScrollToTop from "./components/common/UseScrollToTop";
 import Portfolio from "./components/Portfolio";
 
 const App = () => {

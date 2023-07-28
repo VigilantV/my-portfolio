@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 
-function getPosition(string, subString, index) {
+const getPosition = (string, subString, index) => {
   return string.split(subString, index).join(subString).length;
-}
+};
 
 const UseScrollToTop = ({ children }) => {
   const pathName = useLocation().pathname;
