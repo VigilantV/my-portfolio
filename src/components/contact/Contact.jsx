@@ -1,4 +1,4 @@
-import { Fragment, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
@@ -62,7 +62,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <Fragment>
+    <>
       <div className={classes.resume_btn}>
         <p ref={contactAnimationRef} style={{ cursor: "pointer" }}>
           my resume
@@ -116,7 +116,7 @@ const Contact = () => {
           </a>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
