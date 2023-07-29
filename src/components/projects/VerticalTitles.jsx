@@ -29,9 +29,11 @@ const VerticalTitles = ({
   const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
 
   const projectsVerticalScrollHandler = () => {
-    if (Math.abs(currentWidth - window.innerWidth) > 300) {
-      setCurrentWidth(window.innerWidth);
-    }
+    setCurrentWidth((prevValue) => {
+      if (Math.abs(prevValue - window.innerWidth) > 200) {
+        return window.innerWidth;
+      } else return prevValue;
+    });
   };
 
   useEffect(() => {
@@ -42,6 +44,7 @@ const VerticalTitles = ({
   }, []);
 
   useEffect(() => {
+    console.log(currentWidth, window.innerWidth);
     const ctx = verticalScrollAnimation(projectsAnimationRef, setTitlesOnShow);
     return () => {
       ctx.revert();
