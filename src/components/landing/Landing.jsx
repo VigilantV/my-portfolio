@@ -23,17 +23,15 @@ const Landing = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  document.addEventListener("wheel", () => {
-    setShowScrollAnimation(true);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowDown") {
+    window.addEventListener("wheel", () => {
       setShowScrollAnimation(true);
-    }
-  });
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        setShowScrollAnimation(true);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const ctx = headerRevealAnimation(landingAnimationRef);
