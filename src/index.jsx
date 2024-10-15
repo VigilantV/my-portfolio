@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-import App from "./App";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-
+import Portfolio from "./components/Portfolio";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/global/config.scss";
-
 import variables from "./styles/global/_variables.scss";
 
 // global color variables
@@ -16,14 +20,36 @@ window.fadeDarkBlue = variables.fadeDarkBlue;
 window.lightRouge = variables.lightRouge;
 window.rouge = variables.rouge;
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    children: [
+      {
+        index: true,
+        element: <Navigate to="portfolio" replace={true} />,
+      },
+      {
+        path: "portfolio",
+        element: <Portfolio />,
+      },
+    ]
+  }
+], { basename: '/my-portfolio' });
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ToastContainer
+      position="top-left"
+      autoClose={6000}
+      closeOnClick={true}
+      pauseOnHover
+      hideProgressBar={false}
+      draggable={false}
+      theme="dark"
+    />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals(console.log);
