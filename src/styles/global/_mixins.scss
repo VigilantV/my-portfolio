@@ -84,31 +84,6 @@
   }
 }
 
-@mixin messagePopUP($position, $backgroundColor) {
-  position: $position;
-  width: 12vw;
-  height: 7vw;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 1.4vw;
-  padding-top: 2.2vw;
-  color: $lightRouge;
-  background-color: $backgroundColor;
-  opacity: 0;
-  transition: 0.2s;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 5vw;
-    right: 9vw;
-    display: block;
-    width: 2vw;
-    height: 1.5vw;
-    background-color: $backgroundColor;
-  }
-}
-
 @mixin linearShine() {
   &:after {
     content: "";
@@ -141,7 +116,7 @@
     left: 50%;
     display: block;
     width: 0;
-    height: 0.15vw;
+    height: 0.1vw;
     background: $lightRouge;
     transition: width 0.3s ease, left 0.3s ease;
   }

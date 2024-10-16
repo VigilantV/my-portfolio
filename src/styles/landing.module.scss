@@ -3,10 +3,10 @@
 
 .rotating {
   position: fixed;
-  top: -50vw;
-  left: -25vw;
-  width: 150vw;
-  height: 150vw;
+  top: 50%;
+  left: 50%;
+  width: 110vw;
+  height: 110vw;
   z-index: -5;
 
   &_inner {
@@ -22,10 +22,10 @@
 
 @include keyframes(rotate) {
   0% {
-    transform: rotate(0);
+    transform: translate(-50%, -50%) rotate(0);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -41,23 +41,23 @@
 
 .name {
   display: inline-block;
+  margin-left: -0.3vw;
   font-size: 5vw;
   letter-spacing: -0.1vw;
-  margin-left: -0.2vw;
-  color: $darkBlue;
-  cursor: crosshair;
   transition: letter-spacing 0.5s ease;
+  cursor: pointer;
+  color: $darkBlue;
 
   &:hover {
-    letter-spacing: 0.15vw;
+    letter-spacing: 0.12vw;
   }
 }
 
 .profession {
+  margin-left: -4.5vw;
   font-size: 5vw;
   font-weight: bold;
   color: $darkBlue;
-  margin-left: -4.5vw;
 
   p {
     display: inline-block;
@@ -130,22 +130,73 @@
   }
 }
 
-.text_box {
-  @include messagePopUP(absolute, $darkBlue);
+.resume_box {
+  position: absolute;
   top: -10vw;
-  left: 38vw;
-  box-shadow: 0.6vw -0.3vw 0.7vw $fadeDarkBlue;
+  left: 37vw;
+
+  div {
+    width: 12vw;
+    height: 7vw;
+    border-radius: 50%;
+    transition: 0.2s;
+    opacity: 0;
+    box-shadow: 0.6vw -0.3vw 0.8vw $darkBlue;
+    background-color: $blue;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 6.4vw;
+      right: 9.5vw;
+      display: block;
+      width: 1.7vw;
+      height: 1vw;
+      border-radius: 50%;
+      box-shadow: 0.1vw -0.05vw 0.3vw $darkBlue;
+      background-color: $blue;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 7.5vw;
+      right: 10.5vw;
+      display: block;
+      width: 1.2vw;
+      height: 0.7vw;
+      border-radius: 50%;
+      box-shadow: 0.1vw -0.05vw 0.3vw $darkBlue;
+      background-color: $blue;
+    }
+  }
 
   p {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 7.5vw;
-    margin-left: 2.2vw;
+    transform: translate(-50%, -50%);
     transition: transform 0.3s ease;
+    font-size: 1.4vw;
     cursor: pointer;
+    opacity: 0;
+    color: $lightRouge;
     @include underline();
 
     &:hover {
-      transform: scale(1.1);
+      transform: translate(-50%, -50%) scale(1.07);
     }
+  }
+
+  @include animation("float 1.2s infinite ease-in-out alternate");
+}
+
+@include keyframes(float) {
+  0% {
+    top: -10.8vw;
+  }
+  100% {
+    top: -10.1vw;
   }
 }
