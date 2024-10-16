@@ -22,8 +22,9 @@ const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
   }, [showMyResume]);
 
   return (
-    <div id="my_resume" className={classes.text_box}>
-      <p onClick={downloadFile}>my resume</p>
+    <div id="resume_box" className={classes.resume_box}>
+      <div id="talk_box"></div>
+      <p id="talk_box_text" onClick={downloadFile}>my resume</p>
     </div>
   );
 };
