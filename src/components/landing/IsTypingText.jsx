@@ -5,16 +5,16 @@ import isTypingAnimation from "../../animations/isTypingAnimation";
 import classes from "../../styles/landing.module.scss";
 
 const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
-  const texts = new Array(
+  const texts = [
     "Did you checkout the hidden shortcut",
     "to my resume? ",
     "If not, hover on my name to see the magic!"
-  );
+  ];
 
   const [isTypingStart, setIsTypingStart] = useState(false);
   const [whichText, setWhichText] = useState(0);
   const [textId, setTextId] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [typingLines, setTypingLines] = useState(["", "", ""]);
   const [characterDelay, setCharacterDelay] = useState(55);
 
@@ -33,16 +33,6 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
     }
   }, [textId, isTypingStart]);
 
-  const characterDelayHandnler = () => {
-    if (characterDelay !== 55) {
-      setCharacterDelay(55);
-    } else if (whichText === 1 && currentIndex === 12) {
-      setCharacterDelay(1500);
-    } else if (whichText === 2 && currentIndex === 6) {
-      setCharacterDelay(1000);
-    }
-  };
-
   useEffect(() => {
     switch (whichText) {
       case 0:
@@ -57,25 +47,35 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
     }
   }, [whichText]);
 
+  const characterDelayHandnler = () => {
+    if (characterDelay !== 55) {
+      setCharacterDelay(55);
+    } else if (whichText === 1 && currentCharIndex === 12) {
+      setCharacterDelay(1500);
+    } else if (whichText === 2 && currentCharIndex === 6) {
+      setCharacterDelay(1000);
+    }
+  };
+
   useEffect(() => {
     if (isTypingStart) {
       characterDelayHandnler();
-      if (currentIndex < texts[whichText].length) {
+      if (currentCharIndex < texts[whichText].length) {
         const timeout = setTimeout(() => {
           setTypingLines((prevTexts) => ({
             ...prevTexts,
-            [whichText]: prevTexts[whichText] + texts[whichText][currentIndex],
+            [whichText]: prevTexts[whichText] + texts[whichText][currentCharIndex],
           }));
-          setCurrentIndex((prevIndex) => prevIndex + 1);
+          setCurrentCharIndex((prevIndex) => prevIndex + 1);
         }, characterDelay);
 
         return () => clearTimeout(timeout);
       } else if (whichText !== texts.length - 1) {
-        setCurrentIndex(0);
+        setCurrentCharIndex(0);
         setWhichText((prevValue) => prevValue + 1);
       }
     }
-  }, [typingLines, currentIndex, whichText, isTypingStart]);
+  }, [typingLines, currentCharIndex, whichText, isTypingStart]);
 
   return (
     <div className={classes.is_typing}>
