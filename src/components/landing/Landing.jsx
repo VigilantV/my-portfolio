@@ -12,7 +12,6 @@ import outerRotating from "../../images/outer_rotating.png";
 const Landing = () => {
   const [showFlame, setShowFlame] = useState(false);
   const [flameDelay, setFlameDelay] = useState(new Array(9).fill(false));
-
   const [showScrollAnimation, setShowScrollAnimation] = useState(false);
 
   const [showIsTyping, setShowIsTyping] = useState(true);
@@ -22,15 +21,16 @@ const Landing = () => {
   const landingAnimationRef = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    window.addEventListener("wheel", () => {
-      setShowScrollAnimation(true);
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowDown") {
-        setShowScrollAnimation(true);
-      }
-    });
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 200);
+    window.addEventListener("wheel", () =>
+      !showScrollAnimation && setShowScrollAnimation(true)
+    );
+    window.addEventListener("keydown", (e) =>
+      !showScrollAnimation && e.key === "ArrowDown" &&
+      setShowScrollAnimation(true)
+    );
   }, []);
 
   useEffect(() => {
@@ -90,12 +90,8 @@ const Landing = () => {
         </h4>
         <h1
           id="name"
-          onMouseEnter={() => {
-            setShowFlame(true);
-          }}
-          onMouseLeave={() => {
-            setShowFlame(false);
-          }}
+          onMouseEnter={() => setShowFlame(true)}
+          onMouseLeave={() => setShowFlame(false)}
           className={classes.name}
         >
           Mehrab
@@ -103,17 +99,16 @@ const Landing = () => {
         <div id="profession" className={classes.profession}>
           <p>A front</p>
           <div id="dash" className={classes.dash}></div>
-          <p>end web</p>
-          <span style={{ marginRight: "1vw" }}></span>
+          <p style={{ marginRight: "1vw" }}>end web</p>
           <span className={flameDelay[0] ? classes.burn : undefined}>d</span>
-          <span className={flameDelay[1] ? classes.burn : undefined}>e</span>
-          <span className={flameDelay[2] ? classes.burn : undefined}>v</span>
-          <span className={flameDelay[3] ? classes.burn : undefined}>e</span>
-          <span className={flameDelay[4] ? classes.burn : undefined}>l</span>
-          <span className={flameDelay[5] ? classes.burn : undefined}>o</span>
-          <span className={flameDelay[6] ? classes.burn : undefined}>p</span>
-          <span className={flameDelay[7] ? classes.burn : undefined}>e</span>
-          <span className={flameDelay[8] ? classes.burn : undefined}>r</span>
+          <span className={flameDelay[0] && flameDelay[1] ? classes.burn : undefined}>e</span>
+          <span className={flameDelay[1] && flameDelay[2] ? classes.burn : undefined}>v</span>
+          <span className={flameDelay[2] && flameDelay[3] ? classes.burn : undefined}>e</span>
+          <span className={flameDelay[3] && flameDelay[4] ? classes.burn : undefined}>l</span>
+          <span className={flameDelay[4] && flameDelay[5] ? classes.burn : undefined}>o</span>
+          <span className={flameDelay[5] && flameDelay[6] ? classes.burn : undefined}>p</span>
+          <span className={flameDelay[6] && flameDelay[7] ? classes.burn : undefined}>e</span>
+          <span className={flameDelay[7] && flameDelay[8] ? classes.burn : undefined}>r</span>
         </div>
       </div>
       <div id="lazer" className={classes.lazer}></div>
