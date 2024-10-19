@@ -3,16 +3,16 @@
 
 .resume_btn {
   position: absolute;
-  font-size: 1.6vw;
-  top: 101.8vw;
+  top: 5.85vw;
   left: 50vw;
-  color: $lightRouge;
-  transform: rotate(-5deg);
+  transform: rotate(-7deg);
   transition: transform 0.5s ease-out;
+  font-size: 1.6vw;
+  color: $lightRouge;
 
   &:hover {
     padding: 0 3.5vw 2vw 0;
-    transform: translateX(-3.5vw) translateY(-1.8vw) rotate(0);
+    transform: translateX(-1.9vw) translateY(-1.1vw) rotate(0);
   }
 }
 
@@ -21,45 +21,44 @@
   justify-content: space-between;
   height: 37vw;
   padding-top: 9vw;
-  background-color: $darkBlue;
   clip-path: polygon(0 0, 50% 8vw, 100% 0, 100% 100%, 0 100%);
+  background-color: $darkBlue;
 }
 
 .input_section {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1.5vw;
   margin-left: 15vw;
   caret-color: $lightRouge;
 }
 
 .question {
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   color: $whitish;
 }
 
 .text_area {
-  width: 20vw;
-  height: 8vw;
-  font-size: 1.2vw;
-  font-family: calibri;
-  padding: 0.8vw;
-  margin-top: 0.8vw;
+  width: 22vw;
+  height: 8.5vw;
   border: 0.1vw solid $lightBlue;
   border-radius: 0.5vw;
+  padding: 0.8vw;
+  margin-top: 0.8vw;
+  resize: none;
+  font-size: 1.25vw;
+  font-family: calibri;
   background-color: $whitish;
   color: $darkBlue;
-  resize: none;
 
   &::placeholder {
+    font-size: 1.25vw;
     color: $darkBlue;
-    font-size: 1.2vw;
   }
 
   &:focus {
-    outline: none;
     border-width: 0.15vw;
+    outline: none;
   }
 }
 
@@ -82,25 +81,43 @@
 
 .telegram {
   @extend .icon;
-  animation: orbit 15s linear infinite;
+  animation: telegram_orbit 15s linear infinite;
 }
 
-.whatsapp {
+.github {
   @extend .icon;
-  animation: orbit 15s linear 5s infinite;
+  animation: github_orbit 15s linear infinite;
   border-bottom-left-radius: 0 !important;
 }
 
 .linkedin {
   @extend .icon;
-  animation: orbit 15s linear 10s infinite;
+  animation: linkedin_orbit 15s linear infinite;
 }
 
-@keyframes orbit {
+@keyframes telegram_orbit {
   from {
-    transform: rotate(0deg) translateX(8vw) rotate(0deg);
+    transform: rotate(0deg) translateY(8vw) rotate(0deg);
   }
   to {
-    transform: rotate(360deg) translateX(8vw) rotate(-360deg);
+    transform: rotate(360deg) translateY(8vw) rotate(-360deg);
+  }
+}
+
+@keyframes github_orbit {
+  from {
+    transform: rotate(120deg) translateY(8vw) rotate(-120deg);
+  }
+  to {
+    transform: rotate(480deg) translateY(8vw) rotate(-480deg);
+  }
+}
+
+@keyframes linkedin_orbit {
+  from {
+    transform: rotate(240deg) translateY(8vw) rotate(-240deg);
+  }
+  to {
+    transform: rotate(600deg) translateY(8vw) rotate(-600deg);
   }
 }

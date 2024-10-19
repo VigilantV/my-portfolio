@@ -8,7 +8,7 @@ import sendEmail from "./sendEmail";
 
 import classes from "../../styles/contact.module.scss";
 import telegram from "../../images/icons/telegram.png";
-import whatsapp from "../../images/icons/whatsapp.png";
+import github from "../../images/icons/github.png";
 import linkedin from "../../images/icons/linkedin.png";
 
 const Contact = () => {
@@ -24,7 +24,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <div className={classes.resume_btn}>
         <p
           ref={contactAnimationRef}
@@ -33,6 +33,7 @@ const Contact = () => {
         >
           my resume
         </p>
+
       </div>
       <div className={classes.contact_section}>
         <form
@@ -58,10 +59,10 @@ const Contact = () => {
               alignSelf: "end",
               width: "7vw",
               height: "2.6vw",
-              fontSize: "1.2vw",
+              fontSize: "1.25vw",
               fontFamily: "calibri",
               whiteSpace: "nowrap",
-              marginRight: "1vw",
+              marginRight: "2vw",
               color: window.whitish,
               backgroundColor: window.rouge,
               borderRadius: "0.5vw",
@@ -78,15 +79,15 @@ const Contact = () => {
           <a href="https://t.me/Classicplayer">
             <img className={classes.telegram} src={telegram} alt="telegram" />
           </a>
-          <a href="https://wa.me/989114648411">
-            <img className={classes.whatsapp} src={whatsapp} alt="whatsapp" />
+          <a href="https://github.com/VigilantV">
+            <img className={classes.github} src={github} alt="github" />
           </a>
-          <a href="https://www.linkedin.com/in/mehrab-gheibi-988bb3174/">
+          <a href="https://www.linkedin.com/in/mehrabgheibi/">
             <img className={classes.linkedin} src={linkedin} alt="linkedin" />
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

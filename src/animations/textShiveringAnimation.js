@@ -8,22 +8,18 @@ const textShiveringAnimation = (animationRef) => {
       defaults: {
         duration: 0.1,
         yoyo: true,
-        repeat: 5,
+        repeat: 6,
         ease: "none",
       },
     });
-    animation
-      .to(animationRef.current, {
-        x: "+=6",
-      })
-      .to(animationRef.current, {
-        x: "+=12",
-      });
+    animation.to(animationRef.current, {
+      x: "+=6",
+    });
   }, animationRef);
 
   setInterval(() => {
     animation.restart();
-  }, 8000);
+  }, 7000);
 
   return ctx;
 };
