@@ -9,14 +9,14 @@ const TextFieldTemplate = ({ label, name, type }) => {
       variant="standard"
       required
       sx={{
-        width: "20vw",
-        input: { fontSize: "1.1vw", color: window.whitish },
+        width: "22vw",
+        input: { fontSize: "1.2vw", color: window.whitish },
         "& .MuiInputLabel-root": {
-          fontSize: "1.1vw",
+          fontSize: "1.15vw",
           color: window.whitish,
         },
         "& .MuiInputLabel-root.Mui-focused": {
-          fontSize: "0.9vw",
+          fontSize: "1vw",
           color: window.paleBlue,
         },
         "& .MuiInput-underline:before": { borderBottomColor: window.whitish },
