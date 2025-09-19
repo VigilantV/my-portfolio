@@ -1,14 +1,36 @@
-import Landing from "./landing/Landing";
-import Projects from "./projects/Projects";
-import Contact from "./contact/Contact";
+import { DotLottiePlayer } from "@dotlottie/react-player";
+import "@dotlottie/react-player/dist/index.css";
+import animation from "../animations/computerAnimation.json";
+import { useRecoilValue } from "recoil";
+import { midDeskStateAtom } from "../store/deviceState";
+import DeviceState from "./common/DeviceState";
+import Landing from "./cursive/landing/Landing";
+import Projects from "./cursive/projects/Projects";
+import Contact from "./cursive/contact/Contact";
 
 const Portfolio = () => {
+  const isMidDesk = useRecoilValue(midDeskStateAtom);
+
   return (
-    <>
-      <Landing />
-      <Projects />
-      <Contact />
-    </>
+    <DeviceState>
+      {isMidDesk ? (
+        <div>
+          <DotLottiePlayer
+            src={animation}
+            autoplay
+            loop
+            speed={0.2}
+            className="absolute top-0 left-0 h-[180vh] w-full tablet:w-[140vw] mt-[-35vh] tablet:ml-[-20vw] opacity-10"
+          ></DotLottiePlayer>
+        </div>
+      ) : (
+        <>
+          <Landing />
+          <Projects />
+          <Contact />
+        </>
+      )}
+    </DeviceState>
   );
 };
 

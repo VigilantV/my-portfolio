@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-
-import isTypingAnimation from "../../animations/isTypingAnimation";
-
-import classes from "../../styles/landing.module.scss";
+import isTypingAnimation from "../../../animations/isTypingAnimation";
+import classes from "../../../styles/cursive/landing.module.scss";
 
 const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
   const texts = [
     "Did you checkout the hidden shortcut",
     "to my resume? ",
-    "If not, hover on my name to see the magic!"
+    "If not, hover on my name to see the magic!",
   ];
 
   const [isTypingStart, setIsTypingStart] = useState(false);
@@ -64,7 +62,8 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
         const timeout = setTimeout(() => {
           setTypingLines((prevTexts) => ({
             ...prevTexts,
-            [whichText]: prevTexts[whichText] + texts[whichText][currentCharIndex],
+            [whichText]:
+              prevTexts[whichText] + texts[whichText][currentCharIndex],
           }));
           setCurrentCharIndex((prevIndex) => prevIndex + 1);
         }, characterDelay);

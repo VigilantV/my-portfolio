@@ -34,17 +34,6 @@
 }
 
 @mixin chevron_button {
-  @keyframes move_chevron {
-    33.3% {
-      opacity: 1;
-      transform: translateY(2vw);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(4vw) scale(0.5);
-    }
-  }
-
   width: 2.2vw;
   height: 0.4vw;
   transform: scale(0.3);
@@ -81,6 +70,17 @@
   &:after {
     right: 0;
     transform: skewY(-32deg);
+  }
+
+  @keyframes move_chevron {
+    33.3% {
+      opacity: 1;
+      transform: translateY(2vw);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(4vw) scale(0.5);
+    }
   }
 }
 

@@ -8,7 +8,7 @@ const sendEmail = (e, formRef) => {
       "service_cu34nko",
       "template_qmzuo3s",
       formRef.current,
-      "mun2Y_GUgMsZ0vy8s",
+      "mun2Y_GUgMsZ0vy8s"
     )
     .then(
       () => {
@@ -16,7 +16,7 @@ const sendEmail = (e, formRef) => {
       },
       () => {
         toast.error("Unfortunately, your email was not sent.");
-      },
+      }
     );
   e.target.reset();
 };

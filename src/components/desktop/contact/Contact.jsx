@@ -1,15 +1,13 @@
 import { useRef, useEffect } from "react";
 import { Button } from "@mui/material";
-
 import TextFieldTemplate from "./TextFieldTemplate";
-import textShiveringAnimation from "../../animations/textShiveringAnimation";
-import downloadFile from "../common/downloadFile";
+import textShiveringAnimation from "../../../animations/textShiveringAnimation";
+import downloadFile from "../../common/downloadFile";
 import sendEmail from "./sendEmail";
-
-import classes from "../../styles/contact.module.scss";
-import telegram from "../../images/icons/telegram.png";
-import github from "../../images/icons/github.png";
-import linkedin from "../../images/icons/linkedin.png";
+import classes from "../../../styles/cursive/contact.module.scss";
+import telegram from "../../../images/icons/telegram.png";
+import github from "../../../images/icons/github.png";
+import linkedin from "../../../images/icons/linkedin.png";
 
 const Contact = () => {
   const formRef = useRef();
@@ -33,7 +31,6 @@ const Contact = () => {
         >
           my resume
         </p>
-
       </div>
       <div className={classes.contact_section}>
         <form

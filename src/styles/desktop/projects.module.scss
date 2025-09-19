@@ -1,16 +1,16 @@
-@use "../styles/global/variables" as *;
-@use "../styles/global/mixins" as *;
+@use "../global/variables" as *;
+@use "../global/mixins" as *;
 
-.section {
+.projects_section {
   padding: 3vw 0 5vw;
 }
 
 .title {
+  margin-bottom: 5vw;
   font-size: 5vw;
   font-weight: 400;
   font-family: calibri;
   text-align: center;
-  margin-bottom: 5vw;
   color: $darkBlue;
 }
 
@@ -24,19 +24,18 @@
 .vertical_titles {
   display: inline-flex;
   flex-direction: column;
-  align-items: start;
+  align-items: end;
   height: 30vw;
-  width: 26vw;
+  width: 27vw;
   padding-left: 1vw;
   overflow-y: scroll;
   overflow-x: hidden;
   cursor: s-resize;
-  scrollbar-width: none;
 }
 
 .project {
-  height: 6vw;
   flex: none;
+  height: 6vw;
   font-size: 1.5vw;
   padding-top: 1.5vw;
   opacity: 0.5;
@@ -81,21 +80,21 @@
   left: 10vw;
   width: 45vw;
   height: 26vw;
-  transition: 0.5s;
   border-radius: 0.7vw;
+  transition: 0.5s;
 }
 
 .website_url {
   position: absolute;
   bottom: 0;
   left: 50%;
+  transform: translateX(-50%);
+  transition: 0.5s;
   font-size: 2.2vw;
   font-weight: 500;
   text-decoration: none;
-  color: $lightRouge;
   opacity: 0;
-  transform: translateX(-50%);
-  transition: 0.5s;
+  color: $lightRouge;
   @include underline();
 }
 

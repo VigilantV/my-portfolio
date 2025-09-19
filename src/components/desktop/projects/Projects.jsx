@@ -1,9 +1,7 @@
 import { useState, useRef } from "react";
-
 import VerticalTitles from "./VerticalTitles";
 import ProjectsImages from "./ProjectsImages";
-
-import classes from "../../styles/projects.module.scss";
+import classes from "../../../styles/cursive/projects.module.scss";
 
 const Projects = () => {
   const [clickedBtnIndex, setClickedBtnIndex] = useState(-1);
@@ -19,7 +17,7 @@ const Projects = () => {
     <div
       id="projects_section"
       ref={projectsAnimationRef}
-      className={classes.section}
+      className={classes.projects_section}
     >
       <p className={classes.title}>Projects</p>
       <div className={classes.projects}>

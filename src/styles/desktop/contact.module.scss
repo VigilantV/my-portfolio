@@ -1,5 +1,5 @@
-@use "../styles/global/variables" as *;
-@use "../styles/global/mixins" as *;
+@use "../global/variables" as *;
+@use "../global/mixins" as *;
 
 .resume_btn {
   position: absolute;
@@ -28,8 +28,8 @@
 .input_section {
   display: flex;
   flex-direction: column;
-  gap: 1.5vw;
-  margin-left: 15vw;
+  gap: 1.2vw;
+  margin-left: 12vw;
   caret-color: $lightRouge;
 }
 
@@ -64,7 +64,7 @@
 
 .icons_section {
   position: relative;
-  margin-right: 32vw;
+  margin-right: 28vw;
 }
 
 .icon {

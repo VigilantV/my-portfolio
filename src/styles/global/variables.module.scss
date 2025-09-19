@@ -1,0 +1,10 @@
+@use "./_variables.scss" as *;
+
+:export {
+  whitish: $whitish;
+  paleBlue: $paleBlue;
+  lightBlue: $lightBlue;
+  fadeDarkBlue: $fadeDarkBlue;
+  lightRouge: $lightRouge;
+  rouge: $rouge;
+}

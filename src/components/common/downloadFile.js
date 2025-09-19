@@ -1,4 +1,4 @@
-import resumeFile from "../../data files/Mehrab_Gheibi_Resume.pdf";
+import resumeFile from "../../data_files/Mehrab_Gheibi_Resume.pdf";
 
 const downloadFile = () => {
   const aTag = document.createElement("a");

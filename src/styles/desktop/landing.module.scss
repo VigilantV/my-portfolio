@@ -1,5 +1,5 @@
-@use "../styles/global/variables" as *;
-@use "../styles/global/mixins" as *;
+@use "../global/variables" as *;
+@use "../global/mixins" as *;
 
 .rotating {
   position: fixed;
@@ -66,13 +66,13 @@
 }
 
 .fire {
-  @include flame();
   animation: flame 0.5s ease-in-out infinite alternate;
+  @include flame();
 }
 
 .burn {
-  @include flame();
   animation: flame 0.8s ease-out infinite alternate;
+  @include flame();
 }
 
 .dash {
