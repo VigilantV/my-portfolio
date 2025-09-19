@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import isTypingAnimation from "../../../animations/isTypingAnimation";
-import classes from "../../../styles/cursive/landing.module.scss";
+import classes from "../../../styles/desktop/landing.module.scss";
 
 const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
   const texts = [

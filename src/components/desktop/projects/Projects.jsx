@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import VerticalTitles from "./VerticalTitles";
 import ProjectsImages from "./ProjectsImages";
-import classes from "../../../styles/cursive/projects.module.scss";
+import classes from "../../../styles/desktop/projects.module.scss";
 
 const Projects = () => {
   const [clickedBtnIndex, setClickedBtnIndex] = useState(-1);

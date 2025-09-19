@@ -3,7 +3,7 @@ import IsTyping from "./IsTypingText";
 import MyResumeTextBox from "./MyResumeTextBox";
 import headerRevealAnimation from "../../../animations/headerRevealAnimation";
 import dashAnimation from "../../../animations/dashAnimation";
-import classes from "../../../styles/cursive/landing.module.scss";
+import classes from "../../../styles/desktop/landing.module.scss";
 import innerRotating from "../../../images/inner_rotating.png";
 import outerRotating from "../../../images/outer_rotating.png";
 

@@ -4,9 +4,9 @@ import animation from "../animations/computerAnimation.json";
 import { useRecoilValue } from "recoil";
 import { midDeskStateAtom } from "../store/deviceState";
 import DeviceState from "./common/DeviceState";
-import Landing from "./cursive/landing/Landing";
-import Projects from "./cursive/projects/Projects";
-import Contact from "./cursive/contact/Contact";
+import Landing from "./desktop/landing/Landing";
+import Projects from "./desktop/projects/Projects";
+import Contact from "./desktop/contact/Contact";
 
 const Portfolio = () => {
   const isMidDesk = useRecoilValue(midDeskStateAtom);

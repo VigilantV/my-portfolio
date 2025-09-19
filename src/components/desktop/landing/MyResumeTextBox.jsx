@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import resumeTextBoxAnimation from "../../../animations/resumeTextBoxAnimation";
 import downloadFile from "../../common/downloadFile";
-import classes from "../../../styles/cursive/landing.module.scss";
+import classes from "../../../styles/desktop/landing.module.scss";
 
 const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
   const [showMyResume, setShowMyResume] = useState(false);

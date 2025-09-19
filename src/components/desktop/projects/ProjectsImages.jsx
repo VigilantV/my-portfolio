@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import projectImageAnimation from "../../../animations/projectImageAnimation";
-import classes from "../../../styles/cursive/projects.module.scss";
+import classes from "../../../styles/desktop/projects.module.scss";
 
 const ProjectsImages = ({
   projectsAnimationRef,

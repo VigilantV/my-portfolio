@@ -6,7 +6,7 @@ import {
   animation_3,
 } from "../../../animations/projectImageAnimation";
 import projects from "../../../data_files/projects";
-import classes from "../../../styles/cursive/projects.module.scss";
+import classes from "../../../styles/desktop/projects.module.scss";
 import scrollBar from "../../../styles/scrollbar.module.scss";
 
 const VerticalTitles = ({
