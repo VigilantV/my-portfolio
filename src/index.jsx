@@ -5,12 +5,12 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import reportWebVitals from "./reportWebVitals";
+import { RecoilRoot } from "recoil";
 import Portfolio from "./components/Portfolio";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/global/config.scss";
-import variables from "./styles/global/_variables.scss";
+import variables from "./styles/global/variables.module.scss";
 
 // global color variables
 window.whitish = variables.whitish;
@@ -32,24 +32,24 @@ const router = createBrowserRouter([
         path: "portfolio",
         element: <Portfolio />,
       },
-    ]
-  }
-], { basename: '/my-portfolio' });
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ToastContainer
-      position="top-left"
-      autoClose={6000}
-      closeOnClick={true}
-      pauseOnHover
-      hideProgressBar={false}
-      draggable={false}
-      theme="dark"
-    />
-    <RouterProvider router={router} />
+    <RecoilRoot>
+      <ToastContainer
+        position="top-left"
+        autoClose={6000}
+        closeOnClick={true}
+        pauseOnHover
+        hideProgressBar={false}
+        draggable={false}
+        theme="dark"
+      />
+      <RouterProvider router={router} />
+    </RecoilRoot>
   </React.StrictMode>
 );
-
-// reportWebVitals(console.log);

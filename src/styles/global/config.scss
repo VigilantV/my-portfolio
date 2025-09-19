@@ -1,5 +1,9 @@
 @use "../global/variables" as *;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --scroll-behavior: hidden;
 }
@@ -18,15 +22,11 @@ body {
   background-color: $whitish;
 }
 
-html {
-  scrollbar-width: none;
-}
-
-.toastify_style {
-  width: 25vw;
-  font-size: 1.2vw;
-}
-
 ::-webkit-scrollbar {
   display: none;
+}
+
+.Toastify__toast {
+  width: 23vw;
+  font-size: 1.2vw;
 }
