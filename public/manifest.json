@@ -1,19 +1,11 @@
 {
-  "short_name": "my-portfolio",
-  "name": "my-portfolio",
+  "short_name": "portfolio",
+  "name": "portfolio",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "32x32",
       "type": "image/x-icon"
-    },
-    {
-      "src": "portfolio-192.png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "portfolio-512.png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
