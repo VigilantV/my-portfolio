@@ -64,12 +64,14 @@
 
 .icons_section {
   position: relative;
-  margin-right: 28vw;
+  width: 3.2vw;
+  margin-right: 30vw;
 }
 
 .icon {
   position: absolute;
   top: 12vw;
+  left: 10vw;
   width: 3.2vw;
   border-radius: 50%;
   cursor: pointer;
@@ -87,7 +89,6 @@
 .github {
   @extend .icon;
   animation: github_orbit 15s linear infinite;
-  border-bottom-left-radius: 0 !important;
 }
 
 .linkedin {
@@ -97,27 +98,27 @@
 
 @keyframes telegram_orbit {
   from {
-    transform: rotate(0deg) translateY(8vw) rotate(0deg);
+    transform: rotate(0deg) translateY(9vw) rotate(0deg);
   }
   to {
-    transform: rotate(360deg) translateY(8vw) rotate(-360deg);
+    transform: rotate(360deg) translateY(9vw) rotate(-360deg);
   }
 }
 
 @keyframes github_orbit {
   from {
-    transform: rotate(120deg) translateY(8vw) rotate(-120deg);
+    transform: rotate(120deg) translateY(9vw) rotate(-120deg);
   }
   to {
-    transform: rotate(480deg) translateY(8vw) rotate(-480deg);
+    transform: rotate(480deg) translateY(9vw) rotate(-480deg);
   }
 }
 
 @keyframes linkedin_orbit {
   from {
-    transform: rotate(240deg) translateY(8vw) rotate(-240deg);
+    transform: rotate(240deg) translateY(9vw) rotate(-240deg);
   }
   to {
-    transform: rotate(600deg) translateY(8vw) rotate(-600deg);
+    transform: rotate(600deg) translateY(9vw) rotate(-600deg);
   }
 }
