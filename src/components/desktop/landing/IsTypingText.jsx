@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import isTypingAnimation from "../../../animations/isTypingAnimation";
 import classes from "../../../styles/desktop/landing.module.scss";
+import clickSoundSrc from "../../../assests/keyboard_click.mp3";
 
 const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
   const texts = [
@@ -15,6 +16,78 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [typingLines, setTypingLines] = useState(["", "", ""]);
   const [characterDelay, setCharacterDelay] = useState(55);
+
+  const audioPoolRef = useRef([]);
+  const poolIndexRef = useRef(0);
+  const isAudioUnlockedRef = useRef(false);
+
+  useEffect(() => {
+    const poolSize = 6;
+    const created = new Array(poolSize).fill(null).map(() => {
+      const audio = new Audio(clickSoundSrc);
+      audio.preload = "auto";
+      audio.volume = 0.25;
+      return audio;
+    });
+    audioPoolRef.current = created;
+
+    return () => {
+      // Cleanup
+      audioPoolRef.current.forEach((a) => {
+        try {
+          a.pause();
+          a.currentTime = 0;
+        } catch (_) {}
+      });
+      audioPoolRef.current = [];
+    };
+  }, []);
+
+  // Autoplay unlock on first user interaction (mouse click or keyboard only)
+  useEffect(() => {
+    if (isAudioUnlockedRef.current) return;
+
+    const unlock = async () => {
+      if (isAudioUnlockedRef.current) return;
+      const pool = audioPoolRef.current;
+      if (!pool.length) return;
+      try {
+        await pool[0].play();
+        pool[0].pause();
+        pool[0].currentTime = 0;
+        isAudioUnlockedRef.current = true;
+        ["mousedown", "keydown"].forEach((evt) =>
+          window.removeEventListener(evt, unlock)
+        );
+      } catch (_) {
+        // Ignore; keep listeners until a later gesture
+      }
+    };
+
+    const add = (evt, opts) => window.addEventListener(evt, unlock, opts);
+    add("mousedown", { once: false });
+    add("keydown", { once: false });
+    return () => {
+      ["mousedown", "keydown"].forEach((evt) =>
+        window.removeEventListener(evt, unlock)
+      );
+    };
+  }, []);
+
+  const playClickSound = () => {
+    const pool = audioPoolRef.current;
+    if (!pool.length) return;
+    const index = poolIndexRef.current;
+    poolIndexRef.current = (index + 1) % pool.length;
+    const audio = pool[index];
+    try {
+      audio.currentTime = 0;
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.catch(() => {});
+      }
+    } catch (_) {}
+  };
 
   useEffect(() => {
     if (showScrollAnimation) {
@@ -45,13 +118,18 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
     }
   }, [whichText]);
 
+  const getRealisticTypingDelay = (char) => {
+    if (char === "?") return 1000;
+    if (char === ",") return 1300;
+    if (char === " ") return Math.random() * 60 + 40;
+    return Math.random() * 300 + 45;
+  };
+
   const characterDelayHandnler = () => {
-    if (characterDelay !== 55) {
-      setCharacterDelay(55);
-    } else if (whichText === 1 && currentCharIndex === 12) {
-      setCharacterDelay(1500);
-    } else if (whichText === 2 && currentCharIndex === 6) {
-      setCharacterDelay(1000);
+    if (currentCharIndex < texts[whichText].length) {
+      const currentChar = texts[whichText][currentCharIndex];
+      const targetDelay = getRealisticTypingDelay(currentChar);
+      setCharacterDelay(targetDelay);
     }
   };
 
@@ -60,11 +138,12 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
       characterDelayHandnler();
       if (currentCharIndex < texts[whichText].length) {
         const timeout = setTimeout(() => {
+          const nextChar = texts[whichText][currentCharIndex];
           setTypingLines((prevTexts) => ({
             ...prevTexts,
-            [whichText]:
-              prevTexts[whichText] + texts[whichText][currentCharIndex],
+            [whichText]: prevTexts[whichText] + nextChar,
           }));
+          if (Math.random() < 0.8) playClickSound();
           setCurrentCharIndex((prevIndex) => prevIndex + 1);
         }, characterDelay);
 

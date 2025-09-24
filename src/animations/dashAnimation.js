@@ -15,18 +15,22 @@ const dashAnimation = (animationRef) => {
       },
     });
     tl.to("#dash", {
-      y: "15vw",
-      rotation: -27,
+      y: "16vw",
+      rotation: -40,
     })
       .to("#dash", {
-        y: "13vw",
-        x: "0.3vw",
+        y: "13.5vw",
+        x: "0.7vw",
         rotation: 30,
-        duration: 0.1,
+        duration: 0.12,
+        ease: CustomEase.create(
+          "custom",
+          "M0,0 C0.33333, 0.66667, 0.66667, 1 1,1 "
+        ),
       })
       .to("#dash", {
         y: "5vw",
-        x: "2.5vw",
+        x: "5vw",
         ease: CustomEase.create(
           "custom",
           "M0,0 C0.33333, 0.66667, 0.66667, 1 1,1 "
@@ -35,50 +39,71 @@ const dashAnimation = (animationRef) => {
       .to(
         "#dash",
         {
-          rotation: 900,
+          rotation: 1040,
           duration: 2,
-          ease: CustomEase.create("custom", "M0,0,C0,0.198,0.8,1,1,1"),
+          x: "6.5vw",
+          ease: CustomEase.create("custom", "M0,0,C0,0.198,0.8,0.7,1,1"),
         },
         "<"
       )
       .to(
         "#dash",
         {
-          y: "15vw",
-          x: "5vw",
+          y: "16vw",
+          x: "9vw",
         },
         "<1"
       )
-      .to(
-        "#lazer",
-        {
-          x: "41vw",
-          duration: 0.5,
-        },
-        "<0.5"
-      )
-      .set("#lazer", { display: "none" })
+      .to("#dash", {
+        y: "15vw",
+        x: "9.4vw",
+        rotation: 1070,
+        duration: 0.05,
+        ease: CustomEase.create(
+          "custom",
+          "M0,0 C0.33333, 0.66667, 0.66667, 1 1,1 "
+        ),
+      })
+      .to("#dash", {
+        y: "10vw",
+        x: "12vw",
+        duration: 0.7,
+        ease: CustomEase.create(
+          "custom",
+          "M0,0 C0.33333, 0.66667, 0.66667, 1 1,1 "
+        ),
+      })
       .to(
         "#dash",
         {
-          x: "13.8vw",
-          duration: 0.5,
-          ease: "power1.out",
+          rotation: 1980,
+          duration: 1.7,
+          x: "16.6vw",
+          ease: CustomEase.create("custom", "M0,0,C0,0.198,0.8,0.7,1,1"),
         },
         "<"
       )
       .to(
         "#dash",
         {
+          y: "16vw",
+          x: "18vw",
+        },
+        "<0.67"
+      )
+      .to(
+        "#dash",
+        {
+          duration: 0.6,
           opacity: 0,
         },
-        "<0.1"
+        "<0.5"
       )
       .to(
         "#chevron",
         {
           scale: 1,
-          y: "-7vw",
+          y: "-11vw",
         },
         "<"
       );

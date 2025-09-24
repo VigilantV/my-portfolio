@@ -33,8 +33,8 @@
   }
 }
 
-@mixin chevron_button {
-  width: 2.2vw;
+@mixin chevron_arrow {
+  width: 2.4vw;
   height: 0.4vw;
   transform: scale(0.3);
   animation: move_chevron 3s ease-out infinite;

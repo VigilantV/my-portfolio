@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import IsTyping from "./IsTypingText";
 import MyResumeTextBox from "./MyResumeTextBox";
 import headerRevealAnimation from "../../../animations/headerRevealAnimation";
@@ -6,6 +8,8 @@ import dashAnimation from "../../../animations/dashAnimation";
 import classes from "../../../styles/desktop/landing.module.scss";
 import innerRotating from "../../../images/inner_rotating.png";
 import outerRotating from "../../../images/outer_rotating.png";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const Landing = () => {
   const [showFlame, setShowFlame] = useState(false);
@@ -47,7 +51,7 @@ const Landing = () => {
       const ctx = dashAnimation(landingAnimationRef);
       setTimeout(() => {
         setIsChevronClickable(true);
-      }, 13200);
+      }, 0);
       return () => ctx.revert();
     }
   }, [showScrollAnimation]);
@@ -83,10 +87,10 @@ const Landing = () => {
   }, [showFlame]);
 
   return (
-    <div ref={landingAnimationRef}>
+    <div id="landing_section" ref={landingAnimationRef}>
       <img className={classes.rotating_inner} src={innerRotating} />
       <img className={classes.rotating_outer} src={outerRotating} />
-      <div className={classes.intro}>
+      <div className={classes.landing}>
         <h4 id="greeting" className={classes.greeting_text}>
           Hi, my name is
         </h4>
@@ -97,7 +101,7 @@ const Landing = () => {
           className={classes.name}
         >
           <svg
-            className={classes.name_svg}
+            width="18rem"
             viewBox="-1 10 162 36.5"
             preserveAspectRatio="xMidYMid meet"
           >
@@ -170,7 +174,6 @@ const Landing = () => {
           </span>
         </div>
       </div>
-      <div id="lazer" className={classes.lazer}></div>
       <div
         id="chevron"
         className={classes.chevron_button}
@@ -179,18 +182,22 @@ const Landing = () => {
             document
               .querySelector(":root")
               .style.setProperty("--scroll-behavior", "scroll");
-            document
-              .getElementById("projects_section")
-              .scrollIntoView({ behavior: "smooth" });
-            setTimeout(() => {
-              setShowIsTyping(false);
-            }, 400);
+            gsap.to(window, {
+              duration: 1,
+              scrollTo: { y: "#projects_section" },
+              ease: "power2.inOut",
+              onComplete: () => {
+                setTimeout(() => {
+                  setShowIsTyping(false);
+                }, 400);
+              },
+            });
           }
         }}
       >
-        <div className={classes.chevron}></div>
-        <div className={classes.chevron}></div>
-        <div className={classes.chevron}></div>
+        <div className={classes.chevron_arrow}></div>
+        <div className={classes.chevron_arrow}></div>
+        <div className={classes.chevron_arrow}></div>
       </div>
       {showIsTyping && (
         <IsTyping

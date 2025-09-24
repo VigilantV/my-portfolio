@@ -29,8 +29,9 @@
   }
 }
 
-.intro {
-  margin: 15vw 0 0 25vw;
+.landing {
+  height: 100vh;
+  padding: 15vw 0 0 25vw;
 }
 
 .greeting_text {
@@ -46,18 +47,14 @@
   cursor: pointer;
 }
 
-.name_svg {
-  width: 18rem;
-}
-
 .name_path {
-  stroke: $darkBlue;
   stroke-width: 1.4;
-  fill: transparent;
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke: $darkBlue;
+  fill: transparent;
   animation: draw_name 20s linear forwards,
     fill_name 0.7s ease-in-out 3.5s forwards;
 }
@@ -105,34 +102,16 @@
   background-color: $darkBlue;
 }
 
-.lazer {
-  position: absolute;
-  top: 43vw;
-  left: -10vw;
-  width: 10vw;
-  height: 0.2vw;
-  border-radius: 50%;
-  background: linear-gradient(
-    to right,
-    $lightBlue,
-    $paleBlue,
-    $lightBlue,
-    $paleBlue,
-    $lightBlue
-  );
-}
-
 .chevron_button {
-  width: 2.2vw;
+  position: absolute;
+  top: 47vw;
+  left: calc(50vw - 1.1vw);
   height: 5vw;
-  margin-top: 11vw;
-  margin-left: 48.9vw;
-  transform: scale(0);
   cursor: pointer;
 }
 
-.chevron {
-  @include chevron_button();
+.chevron_arrow {
+  @include chevron_arrow();
 }
 
 .is_typing {
