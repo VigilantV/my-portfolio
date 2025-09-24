@@ -1,9 +1,14 @@
 @use "../global/variables" as *;
 @use "../global/mixins" as *;
 
+.contact_section {
+  position: relative;
+  height: 100vh;
+}
+
 .resume_btn {
   position: absolute;
-  top: 5.85vw;
+  top: 16.25vw;
   left: 50vw;
   transform: rotate(-7deg);
   transition: transform 0.5s ease-out;
@@ -16,11 +21,22 @@
   }
 }
 
-.contact_section {
+.title {
+  margin-bottom: 4vw;
+  font-size: 5vw;
+  font-weight: 400;
+  font-family: calibri;
+  text-align: center;
+  color: $darkBlue;
+}
+
+.contact_box {
+  position: absolute;
+  bottom: 0;
   display: flex;
+  width: 100%;
+  padding: 8vw 0 1.5vw;
   justify-content: space-between;
-  height: 37vw;
-  padding-top: 9vw;
   clip-path: polygon(0 0, 50% 8vw, 100% 0, 100% 100%, 0 100%);
   background-color: $darkBlue;
 }
@@ -65,7 +81,7 @@
 .icons_section {
   position: relative;
   width: 3.2vw;
-  margin-right: 30vw;
+  margin-right: 32vw;
 }
 
 .icon {

@@ -22,7 +22,8 @@ const Contact = () => {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div id="contact_section" className={classes.contact_section}>
+      <h2 className={classes.title}>Contact Me</h2>
       <div className={classes.resume_btn}>
         <p
           ref={contactAnimationRef}
@@ -32,7 +33,7 @@ const Contact = () => {
           my resume
         </p>
       </div>
-      <div className={classes.contact_section}>
+      <div className={classes.contact_box}>
         <form
           ref={formRef}
           className={classes.input_section}
