@@ -7,9 +7,12 @@ import DeviceState from "./common/DeviceState";
 import Landing from "./desktop/landing/Landing";
 import Projects from "./desktop/projects/Projects";
 import Contact from "./desktop/contact/Contact";
+import useSectionNavigation from "../hooks/useSectionNavigation";
 
 const Portfolio = () => {
   const isMidDesk = useRecoilValue(midDeskStateAtom);
+
+  useSectionNavigation();
 
   return (
     <DeviceState>
