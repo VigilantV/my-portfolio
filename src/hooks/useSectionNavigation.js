@@ -1,121 +1,106 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollToPlugin);
+const SECTIONS = ["landing_section", "projects_section", "contact_section"];
 
 const useSectionNavigation = () => {
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const lastScrollTime = useRef(0);
-  const accumulatedDelta = useRef(0);
-  const sections = ["landing_section", "projects_section", "contact_section"];
+  const currentSectionIndex = useRef(0);
+  const isNavigating = useRef(false);
+  const accumulatedScrollDelta = useRef(0);
 
-  const navigateToSection = useCallback((index) => {
-    // Kill any existing scroll animations
-    gsap.killTweensOf(window, "scrollTo");
-
-    setIsNavigating(true);
-
-    gsap.to(window, {
-      duration: 1.2,
-      scrollTo: { y: `#${sections[index]}`, offsetY: 0 },
-      ease: "power2.inOut",
-      onComplete: () => {
-        setCurrentSectionIndex(index);
-        setIsNavigating(false);
-      },
-      onInterrupt: () => {
-        setIsNavigating(false);
-      },
-    });
+  const getValidSectionIndex = useCallback((index) => {
+    return Math.max(0, Math.min(SECTIONS.length - 1, Math.round(index)));
   }, []);
 
-  useEffect(() => {
-    const threshold = 100; // Minimum scroll distance to trigger navigation
-    const debounceTime = 600; // Minimum time between navigations
+  const navigateToSection = useCallback(
+    (targetIndex) => {
+      const validIndex = getValidSectionIndex(targetIndex);
 
-    const handleWheel = (e) => {
-      // Block all wheel events during navigation
-      if (isNavigating) {
+      if (validIndex === currentSectionIndex.current || isNavigating.current) {
+        return;
+      }
+
+      isNavigating.current = true;
+      currentSectionIndex.current = validIndex;
+
+      gsap.killTweensOf(window, "scrollTo");
+      gsap.to(window, {
+        duration: 1.2,
+        scrollTo: { y: `#${SECTIONS[validIndex]}`, offsetY: 0 },
+        ease: "power2.inOut",
+        onComplete: () => {
+          isNavigating.current = false;
+        },
+        onInterrupt: () => {
+          isNavigating.current = false;
+        },
+      });
+    },
+    [getValidSectionIndex]
+  );
+
+  const handleWheel = useCallback(
+    (e) => {
+      if (isNavigating.current) {
         e.preventDefault();
         return;
       }
 
-      const now = Date.now();
+      accumulatedScrollDelta.current += e.deltaY;
 
-      // Block events during debounce period
-      if (now - lastScrollTime.current < debounceTime) {
-        e.preventDefault();
-        return;
-      }
-
-      // Accumulate scroll delta
-      accumulatedDelta.current += e.deltaY;
-
-      // Check if threshold reached
-      if (Math.abs(accumulatedDelta.current) >= threshold) {
-        const direction = accumulatedDelta.current > 0 ? 1 : -1;
-        const newIndex = Math.max(
-          0,
-          Math.min(sections.length - 1, currentSectionIndex + direction)
+      if (Math.abs(accumulatedScrollDelta.current) >= 100) {
+        const direction = accumulatedScrollDelta.current > 0 ? 1 : -1;
+        const newIndex = getValidSectionIndex(
+          currentSectionIndex.current + direction
         );
 
-        if (newIndex !== currentSectionIndex) {
+        if (newIndex !== currentSectionIndex.current) {
           e.preventDefault();
-          lastScrollTime.current = now;
-          accumulatedDelta.current = 0;
+          accumulatedScrollDelta.current = 0;
           navigateToSection(newIndex);
         } else {
-          accumulatedDelta.current = 0;
+          accumulatedScrollDelta.current = 0;
           e.preventDefault();
         }
       } else {
-        e.preventDefault(); // Prevent normal scrolling while accumulating
+        e.preventDefault();
       }
-    };
+    },
+    [navigateToSection, getValidSectionIndex]
+  );
 
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (isNavigating.current) {
+        e.preventDefault();
+        return;
+      }
+
+      const direction =
+        e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
+
+      if (direction !== 0) {
+        const newIndex = getValidSectionIndex(
+          currentSectionIndex.current + direction
+        );
+        if (newIndex !== currentSectionIndex.current) {
+          e.preventDefault();
+          navigateToSection(newIndex);
+        }
+      }
+    },
+    [navigateToSection, getValidSectionIndex]
+  );
+
+  useEffect(() => {
     window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentSectionIndex, isNavigating, navigateToSection]);
-
-  // Update current section based on scroll position (for internal state tracking)
-  useEffect(() => {
-    const updateCurrentSection = () => {
-      if (isNavigating) return;
-
-      const scrollY = window.scrollY + window.innerHeight / 2; // Center of viewport
-
-      // Find which section contains the center of the viewport
-      for (let i = 0; i < sections.length; i++) {
-        const element = document.getElementById(sections[i]);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementTop = rect.top + window.scrollY;
-          const elementBottom = elementTop + rect.height;
-
-          if (scrollY >= elementTop && scrollY < elementBottom) {
-            if (i !== currentSectionIndex) {
-              setCurrentSectionIndex(i);
-            }
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", updateCurrentSection, { passive: true });
-
-    // Initial check
-    updateCurrentSection();
-
-    return () => {
-      window.removeEventListener("scroll", updateCurrentSection);
-    };
-  }, [isNavigating, currentSectionIndex]);
+  }, [handleWheel, handleKeyDown]);
 };
 
 export default useSectionNavigation;
