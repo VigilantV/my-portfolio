@@ -2,11 +2,12 @@
 @use "../global/mixins" as *;
 
 .projects_section {
-  padding: 3vw 0 5vw;
+  height: 100vh;
+  padding-top: 0.5vw;
 }
 
 .title {
-  margin-bottom: 5vw;
+  margin-bottom: 4vw;
   font-size: 5vw;
   font-weight: 400;
   font-family: calibri;

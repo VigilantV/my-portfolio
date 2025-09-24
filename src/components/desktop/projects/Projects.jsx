@@ -19,7 +19,7 @@ const Projects = () => {
       ref={projectsAnimationRef}
       className={classes.projects_section}
     >
-      <p className={classes.title}>Projects</p>
+      <h2 className={classes.title}>Projects</h2>
       <div className={classes.projects}>
         <VerticalTitles
           projectsAnimationRef={projectsAnimationRef}
