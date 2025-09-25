@@ -7,12 +7,34 @@
 }
 
 .title {
-  margin-bottom: 4vw;
-  font-size: 5vw;
-  font-weight: 400;
-  font-family: calibri;
-  text-align: center;
-  color: $darkBlue;
+  margin: 2vw calc(50vw - 10.5vw) 5vw;
+}
+
+.title_path {
+  stroke-width: 1.4;
+  stroke-dasharray: 1300;
+  stroke-dashoffset: 1300;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: $darkBlue;
+  fill: transparent;
+}
+
+.title_path.animate {
+  animation: draw_title 20s linear forwards,
+    fill_title 0.7s ease-in-out 3.5s forwards;
+}
+
+@keyframes draw_title {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill_title {
+  to {
+    fill: $darkBlue;
+  }
 }
 
 .projects {
