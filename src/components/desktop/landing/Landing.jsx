@@ -11,7 +11,7 @@ import outerRotating from "../../../images/outer_rotating.png";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-const Landing = () => {
+const Landing = ({ navigateToSection }) => {
   const [showFlame, setShowFlame] = useState(false);
   const [flameDelay, setFlameDelay] = useState(new Array(9).fill(false));
   const [showScrollAnimation, setShowScrollAnimation] = useState(false);
@@ -179,19 +179,7 @@ const Landing = () => {
         className={classes.chevron_button}
         onClick={() => {
           if (isChevronClickable) {
-            document
-              .querySelector(":root")
-              .style.setProperty("--scroll-behavior", "scroll");
-            gsap.to(window, {
-              duration: 1,
-              scrollTo: { y: "#projects_section" },
-              ease: "power2.inOut",
-              onComplete: () => {
-                setTimeout(() => {
-                  setShowIsTyping(false);
-                }, 400);
-              },
-            });
+            navigateToSection(1);
           }
         }}
       >

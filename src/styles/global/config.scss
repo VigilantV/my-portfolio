@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --scroll-behavior: hidden;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,7 +14,7 @@
 body {
   user-select: none;
   overflow-x: hidden;
-  overflow-y: var(--scroll-behavior);
+  overflow-y: hidden;
   background-color: $whitish;
 }
 

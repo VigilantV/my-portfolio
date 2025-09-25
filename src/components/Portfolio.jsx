@@ -12,7 +12,7 @@ import useSectionNavigation from "../hooks/useSectionNavigation";
 const Portfolio = () => {
   const isMidDesk = useRecoilValue(midDeskStateAtom);
 
-  useSectionNavigation();
+  const { currentSectionIndex, navigateToSection } = useSectionNavigation();
 
   return (
     <DeviceState>
@@ -28,9 +28,9 @@ const Portfolio = () => {
         </div>
       ) : (
         <>
-          <Landing />
-          <Projects />
-          <Contact />
+          <Landing navigateToSection={navigateToSection} />
+          <Projects currentSectionIndex={currentSectionIndex} />
+          <Contact currentSectionIndex={currentSectionIndex} />
         </>
       )}
     </DeviceState>

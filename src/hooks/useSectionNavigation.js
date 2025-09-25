@@ -1,27 +1,65 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { gsap } from "gsap";
 
 const SECTIONS = ["landing_section", "projects_section", "contact_section"];
 
 const useSectionNavigation = () => {
-  const currentSectionIndex = useRef(0);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const currentSectionIndexRef = useRef(0);
   const isNavigating = useRef(false);
   const accumulatedScrollDelta = useRef(0);
+  const boundaryTimer = useRef(null);
+  const canNavigateFromBoundary = useRef(false);
 
   const getValidSectionIndex = useCallback((index) => {
     return Math.max(0, Math.min(SECTIONS.length - 1, Math.round(index)));
+  }, []);
+
+  const checkBoundaryCondition = useCallback(
+    (verticalTitlesElement, deltaY) => {
+      if (!verticalTitlesElement) return false;
+
+      const { scrollTop, scrollHeight, clientHeight } = verticalTitlesElement;
+      const isAtTop = scrollTop <= 0;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+      // Check if we're trying to scroll beyond boundaries
+      return (isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0);
+    },
+    []
+  );
+
+  const startBoundaryTimer = useCallback(() => {
+    if (boundaryTimer.current) {
+      clearTimeout(boundaryTimer.current);
+    }
+    boundaryTimer.current = setTimeout(() => {
+      canNavigateFromBoundary.current = true;
+    }, 600);
+  }, []);
+
+  const cancelBoundaryTimer = useCallback(() => {
+    if (boundaryTimer.current) {
+      clearTimeout(boundaryTimer.current);
+      boundaryTimer.current = null;
+    }
+    canNavigateFromBoundary.current = false;
   }, []);
 
   const navigateToSection = useCallback(
     (targetIndex) => {
       const validIndex = getValidSectionIndex(targetIndex);
 
-      if (validIndex === currentSectionIndex.current || isNavigating.current) {
+      if (
+        validIndex === currentSectionIndexRef.current ||
+        isNavigating.current
+      ) {
         return;
       }
 
       isNavigating.current = true;
-      currentSectionIndex.current = validIndex;
+      currentSectionIndexRef.current = validIndex;
+      setCurrentSectionIndex(validIndex);
 
       gsap.killTweensOf(window, "scrollTo");
       gsap.to(window, {
@@ -41,7 +79,37 @@ const useSectionNavigation = () => {
 
   const handleWheel = useCallback(
     (e) => {
+      const verticalTitlesElement = document.getElementById("vertical_titles");
+      const isInVerticalTitles = e.target.closest("#vertical_titles");
+
+      if (isInVerticalTitles && verticalTitlesElement) {
+        const isAtBoundary = checkBoundaryCondition(
+          verticalTitlesElement,
+          e.deltaY
+        );
+
+        if (isAtBoundary) {
+          if (!boundaryTimer.current) {
+            startBoundaryTimer();
+          }
+          e.preventDefault();
+        } else {
+          cancelBoundaryTimer();
+          return;
+        }
+      } else {
+        cancelBoundaryTimer();
+      }
+
       if (isNavigating.current) {
+        e.preventDefault();
+        return;
+      }
+
+      const allowNavigation =
+        !isInVerticalTitles || canNavigateFromBoundary.current;
+
+      if (!allowNavigation) {
         e.preventDefault();
         return;
       }
@@ -51,12 +119,14 @@ const useSectionNavigation = () => {
       if (Math.abs(accumulatedScrollDelta.current) >= 100) {
         const direction = accumulatedScrollDelta.current > 0 ? 1 : -1;
         const newIndex = getValidSectionIndex(
-          currentSectionIndex.current + direction
+          currentSectionIndexRef.current + direction
         );
 
-        if (newIndex !== currentSectionIndex.current) {
+        if (newIndex !== currentSectionIndexRef.current) {
           e.preventDefault();
           accumulatedScrollDelta.current = 0;
+          canNavigateFromBoundary.current = false;
+          cancelBoundaryTimer();
           navigateToSection(newIndex);
         } else {
           accumulatedScrollDelta.current = 0;
@@ -66,7 +136,13 @@ const useSectionNavigation = () => {
         e.preventDefault();
       }
     },
-    [navigateToSection, getValidSectionIndex]
+    [
+      navigateToSection,
+      getValidSectionIndex,
+      checkBoundaryCondition,
+      startBoundaryTimer,
+      cancelBoundaryTimer,
+    ]
   );
 
   const handleKeyDown = useCallback(
@@ -81,9 +157,9 @@ const useSectionNavigation = () => {
 
       if (direction !== 0) {
         const newIndex = getValidSectionIndex(
-          currentSectionIndex.current + direction
+          currentSectionIndexRef.current + direction
         );
-        if (newIndex !== currentSectionIndex.current) {
+        if (newIndex !== currentSectionIndexRef.current) {
           e.preventDefault();
           navigateToSection(newIndex);
         }
@@ -99,8 +175,11 @@ const useSectionNavigation = () => {
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("keydown", handleKeyDown);
+      cancelBoundaryTimer();
     };
-  }, [handleWheel, handleKeyDown]);
+  }, [handleWheel, handleKeyDown, cancelBoundaryTimer]);
+
+  return { currentSectionIndex, navigateToSection };
 };
 
 export default useSectionNavigation;
