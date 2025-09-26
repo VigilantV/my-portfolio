@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import animation from "../animations/computerAnimation.json";
@@ -11,8 +12,10 @@ import useSectionNavigation from "../hooks/useSectionNavigation";
 
 const Portfolio = () => {
   const isMidDesk = useRecoilValue(midDeskStateAtom);
+  const [isNavigationEnabled, setIsNavigationEnabled] = useState(false);
 
-  const { currentSectionIndex, navigateToSection } = useSectionNavigation();
+  const { currentSectionIndex, navigateToSection } =
+    useSectionNavigation(isNavigationEnabled);
 
   return (
     <DeviceState>
@@ -28,7 +31,11 @@ const Portfolio = () => {
         </div>
       ) : (
         <>
-          <Landing navigateToSection={navigateToSection} />
+          <Landing
+            navigateToSection={navigateToSection}
+            currentSectionIndex={currentSectionIndex}
+            onNavigationEnabled={setIsNavigationEnabled}
+          />
           <Projects currentSectionIndex={currentSectionIndex} />
           <Contact currentSectionIndex={currentSectionIndex} />
         </>

@@ -11,33 +11,60 @@ import outerRotating from "../../../images/outer_rotating.png";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-const Landing = ({ navigateToSection }) => {
+const Landing = ({
+  navigateToSection,
+  currentSectionIndex,
+  onNavigationEnabled,
+}) => {
   const [showFlame, setShowFlame] = useState(false);
   const [flameDelay, setFlameDelay] = useState(new Array(9).fill(false));
   const [showScrollAnimation, setShowScrollAnimation] = useState(false);
 
-  const [showIsTyping, setShowIsTyping] = useState(true);
-
-  const [isChevronClickable, setIsChevronClickable] = useState(false);
+  const [showIsTyping, setShowIsTyping] = useState(false);
+  const [hasVisitedAnotherSection, setHasVisitedAnotherSection] =
+    useState(false);
 
   const landingAnimationRef = useRef(null);
+  const animationTriggeredRef = useRef(false);
 
   useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 200);
-    window.addEventListener(
-      "wheel",
-      () => !showScrollAnimation && setShowScrollAnimation(true)
-    );
-    window.addEventListener(
-      "keydown",
-      (e) =>
-        !showScrollAnimation &&
-        e.key === "ArrowDown" &&
-        setShowScrollAnimation(true)
-    );
+      window.scrollTo({ top: 0 });
+    }, 100);
+
+    const handleUserInteraction = (e) => {
+      if (!animationTriggeredRef.current) {
+        animationTriggeredRef.current = true;
+        setShowScrollAnimation(true);
+      }
+    };
+
+    window.addEventListener("wheel", handleUserInteraction);
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") handleUserInteraction(e);
+    });
+
+    return () => {
+      window.removeEventListener("wheel", handleUserInteraction);
+      window.removeEventListener("keydown", handleUserInteraction);
+    };
   }, []);
+
+  useEffect(() => {
+    if (currentSectionIndex > 0 && !hasVisitedAnotherSection) {
+      setHasVisitedAnotherSection(true);
+    }
+  }, [currentSectionIndex, hasVisitedAnotherSection]);
+
+  useEffect(() => {
+    if (
+      hasVisitedAnotherSection &&
+      currentSectionIndex === 0 &&
+      !showIsTyping
+    ) {
+      setShowIsTyping(true);
+    }
+  }, [currentSectionIndex, hasVisitedAnotherSection, showIsTyping]);
 
   useEffect(() => {
     const ctx = headerRevealAnimation(landingAnimationRef);
@@ -49,9 +76,6 @@ const Landing = ({ navigateToSection }) => {
   useEffect(() => {
     if (showScrollAnimation) {
       const ctx = dashAnimation(landingAnimationRef);
-      setTimeout(() => {
-        setIsChevronClickable(true);
-      }, 0);
       return () => ctx.revert();
     }
   }, [showScrollAnimation]);
@@ -178,9 +202,8 @@ const Landing = ({ navigateToSection }) => {
         id="chevron"
         className={classes.chevron_button}
         onClick={() => {
-          if (isChevronClickable) {
-            navigateToSection(1);
-          }
+          onNavigationEnabled(true);
+          navigateToSection(1);
         }}
       >
         <div className={classes.chevron_arrow}></div>
@@ -189,7 +212,7 @@ const Landing = ({ navigateToSection }) => {
       </div>
       {showIsTyping && (
         <IsTyping
-          showScrollAnimation={showScrollAnimation}
+          showScrollAnimation={true}
           landingAnimationRef={landingAnimationRef}
         />
       )}

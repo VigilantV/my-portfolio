@@ -3,13 +3,14 @@ import { gsap } from "gsap";
 
 const SECTIONS = ["landing_section", "projects_section", "contact_section"];
 
-const useSectionNavigation = () => {
+const useSectionNavigation = (isNavigationEnabled = true) => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const currentSectionIndexRef = useRef(0);
   const isNavigating = useRef(false);
   const accumulatedScrollDelta = useRef(0);
   const boundaryTimer = useRef(null);
   const canNavigateFromBoundary = useRef(false);
+  const navigationEnabledRef = useRef(isNavigationEnabled);
 
   const getValidSectionIndex = useCallback((index) => {
     return Math.max(0, Math.min(SECTIONS.length - 1, Math.round(index)));
@@ -79,6 +80,8 @@ const useSectionNavigation = () => {
 
   const handleWheel = useCallback(
     (e) => {
+      if (!navigationEnabledRef.current) return;
+
       const verticalTitlesElement = document.getElementById("vertical_titles");
       const isInVerticalTitles = e.target.closest("#vertical_titles");
 
@@ -116,7 +119,7 @@ const useSectionNavigation = () => {
 
       accumulatedScrollDelta.current += e.deltaY;
 
-      if (Math.abs(accumulatedScrollDelta.current) >= 100) {
+      if (Math.abs(accumulatedScrollDelta.current) >= 50) {
         const direction = accumulatedScrollDelta.current > 0 ? 1 : -1;
         const newIndex = getValidSectionIndex(
           currentSectionIndexRef.current + direction
@@ -147,6 +150,8 @@ const useSectionNavigation = () => {
 
   const handleKeyDown = useCallback(
     (e) => {
+      if (!navigationEnabledRef.current) return;
+
       if (isNavigating.current) {
         e.preventDefault();
         return;
@@ -167,6 +172,10 @@ const useSectionNavigation = () => {
     },
     [navigateToSection, getValidSectionIndex]
   );
+
+  useEffect(() => {
+    navigationEnabledRef.current = isNavigationEnabled;
+  }, [isNavigationEnabled]);
 
   useEffect(() => {
     window.addEventListener("wheel", handleWheel, { passive: false });
