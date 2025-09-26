@@ -93,7 +93,7 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
     if (showScrollAnimation) {
       setTimeout(() => {
         setIsTypingStart(true);
-      }, 4500);
+      }, 1000);
     }
   }, [showScrollAnimation]);
 
