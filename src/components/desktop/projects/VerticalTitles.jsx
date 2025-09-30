@@ -8,6 +8,7 @@ import {
 import projects from "../../../data_files/projects";
 import classes from "../../../styles/desktop/projects.module.scss";
 import scrollBar from "../../../styles/scrollbar.module.scss";
+import COLORS from "../../../styles/theme";
 
 const VerticalTitles = ({
   projectsAnimationRef,
@@ -67,7 +68,7 @@ const VerticalTitles = ({
                 cursor: titlesOnShow[i] ? "pointer" : null,
                 borderLeft:
                   clickedBtnIndex === i
-                    ? `0.2vw solid ${window.lightRouge}`
+                    ? `0.2vw solid ${COLORS.lightRouge}`
                     : null,
               }}
               className={classes.project_title}

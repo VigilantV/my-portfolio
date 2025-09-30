@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import COLORS from "../styles/theme";
 
 const isTypingAnimation = (textId, animationRef) => {
   const ctx = gsap.context(() => {
@@ -14,7 +15,7 @@ const isTypingAnimation = (textId, animationRef) => {
     tl.fromTo(
       textId,
       { borderRightColor: "transparent" },
-      { borderRightColor: window.lightBlue }
+      { borderRightColor: COLORS.lightBlue }
     ).set(textId, { delay: 4.5, border: "none" });
   }, animationRef);
 

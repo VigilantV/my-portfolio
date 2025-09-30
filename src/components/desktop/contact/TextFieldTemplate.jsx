@@ -1,4 +1,5 @@
 import TextField from "@mui/material/TextField";
+import COLORS from "../../../styles/theme";
 
 const TextFieldTemplate = ({ label, name, type }) => {
   return (
@@ -10,22 +11,22 @@ const TextFieldTemplate = ({ label, name, type }) => {
       required
       sx={{
         width: "22vw",
-        input: { fontSize: "1.2vw", color: window.whitish },
+        input: { fontSize: "1.2vw", color: COLORS.whitish },
         "& .MuiInputLabel-root": {
           fontSize: "1.15vw",
-          color: window.whitish,
+          color: COLORS.whitish,
         },
         "& .MuiInputLabel-root.Mui-focused": {
           fontSize: "1vw",
-          color: window.paleBlue,
+          color: COLORS.paleBlue,
         },
-        "& .MuiInput-underline:before": { borderBottomColor: window.whitish },
+        "& .MuiInput-underline:before": { borderBottomColor: COLORS.whitish },
         "& .MuiInput-underline:hover:before": {
-          borderBottomColor: `${window.whitish} !important`,
+          borderBottomColor: `${COLORS.whitish} !important`,
         },
         "& .MuiInput-underline.Mui-focused": {
           "&:after": {
-            borderColor: window.paleBlue,
+            borderColor: COLORS.paleBlue,
           },
         },
       }}

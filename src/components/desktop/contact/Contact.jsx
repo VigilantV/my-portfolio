@@ -5,6 +5,7 @@ import textShiveringAnimation from "../../../animations/textShiveringAnimation";
 import downloadFile from "../../common/downloadFile";
 import sendEmail from "./sendEmail";
 import classes from "../../../styles/desktop/contact.module.scss";
+import COLORS from "../../../styles/theme";
 import telegram from "../../../images/icons/telegram.png";
 import github from "../../../images/icons/github.png";
 import linkedin from "../../../images/icons/linkedin.png";
@@ -83,11 +84,11 @@ const Contact = ({ currentSectionIndex }) => {
               fontFamily: "calibri",
               whiteSpace: "nowrap",
               marginRight: "2vw",
-              color: window.whitish,
-              backgroundColor: window.rouge,
+              color: COLORS.whitish,
+              backgroundColor: COLORS.rouge,
               borderRadius: "0.5vw",
               "&:hover": {
-                background: window.lightRouge,
+                background: COLORS.lightRouge,
               },
               transition: "background-color 0.3s",
             }}
@@ -96,13 +97,25 @@ const Contact = ({ currentSectionIndex }) => {
           </Button>
         </form>
         <div className={classes.icons_section}>
-          <a href="https://t.me/Classicplayer">
+          <a
+            href="https://t.me/Classicplayer"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <img className={classes.telegram} src={telegram} alt="telegram" />
           </a>
-          <a href="https://github.com/VigilantV">
+          <a
+            href="https://github.com/VigilantV"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <img className={classes.github} src={github} alt="github" />
           </a>
-          <a href="https://www.linkedin.com/in/mehrabgheibi/">
+          <a
+            href="https://www.linkedin.com/in/mehrabgheibi/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <img className={classes.linkedin} src={linkedin} alt="linkedin" />
           </a>
         </div>

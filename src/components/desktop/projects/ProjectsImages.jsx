@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import projectImageAnimation from "../../../animations/projectImageAnimation";
+import COLORS from "../../../styles/theme";
 import classes from "../../../styles/desktop/projects.module.scss";
 
 const ProjectsImages = ({
@@ -27,13 +28,16 @@ const ProjectsImages = ({
         }}
         id="primary_image"
         src={primaryImage}
+        alt="project primary"
+        loading="lazy"
+        decoding="async"
         className={classes.primary_image}
       />
       <div
         style={{
           visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
           backgroundColor:
-            onHoverLayer && !isDuringAnimation ? window.fadeDarkBlue : null,
+            onHoverLayer && !isDuringAnimation ? COLORS.fadeDarkBlue : null,
         }}
         className={classes.layer_1}
         onMouseEnter={() => {
@@ -72,13 +76,16 @@ const ProjectsImages = ({
         }}
         id="secondary_image"
         src={secondaryImage}
+        alt="project secondary"
+        loading="lazy"
+        decoding="async"
         className={classes.secondary_image}
       />
       <div
         style={{
           visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
           backgroundColor:
-            onHoverLayer && !isDuringAnimation ? window.fadeDarkBlue : null,
+            onHoverLayer && !isDuringAnimation ? COLORS.fadeDarkBlue : null,
         }}
         className={classes.layer_2}
         onMouseEnter={() => {

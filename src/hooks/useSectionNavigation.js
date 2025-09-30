@@ -1,5 +1,8 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const SECTIONS = ["landing_section", "projects_section", "contact_section"];
 

@@ -28,7 +28,7 @@ const Landing = ({
   const animationTriggeredRef = useRef(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       window.scrollTo({ top: 0 });
     }, 100);
 
@@ -39,14 +39,17 @@ const Landing = ({
       }
     };
 
-    window.addEventListener("wheel", handleUserInteraction);
-    window.addEventListener("keydown", (e) => {
+    const handleKeyDown = (e) => {
       if (e.key === "ArrowDown") handleUserInteraction(e);
-    });
+    };
+
+    window.addEventListener("wheel", handleUserInteraction);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener("wheel", handleUserInteraction);
-      window.removeEventListener("keydown", handleUserInteraction);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -112,8 +115,16 @@ const Landing = ({
 
   return (
     <div id="landing_section" ref={landingAnimationRef}>
-      <img className={classes.rotating_inner} src={innerRotating} />
-      <img className={classes.rotating_outer} src={outerRotating} />
+      <img
+        className={classes.rotating_inner}
+        src={innerRotating}
+        alt="inner-rotating"
+      />
+      <img
+        className={classes.rotating_outer}
+        src={outerRotating}
+        alt="outer-rotating"
+      />
       <div className={classes.landing}>
         <h4 id="greeting" className={classes.greeting_text}>
           Hi, my name is
