@@ -119,10 +119,10 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
   }, [whichText]);
 
   const getRealisticTypingDelay = (char) => {
-    if (char === "?") return 1000;
+    if (char === "?") return 1100;
     if (char === ",") return 1300;
     if (char === " ") return Math.random() * 60 + 40;
-    return Math.random() * 300 + 45;
+    return Math.random() * 240 + 40;
   };
 
   const characterDelayHandnler = () => {
@@ -143,7 +143,7 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
             ...prevTexts,
             [whichText]: prevTexts[whichText] + nextChar,
           }));
-          if (Math.random() < 0.8) playClickSound();
+          if (Math.random() < 0.75) playClickSound();
           setCurrentCharIndex((prevIndex) => prevIndex + 1);
         }, characterDelay);
 
