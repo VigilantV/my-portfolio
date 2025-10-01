@@ -57,7 +57,7 @@ const VerticalTitles = ({
     >
       <div style={{ direction: "ltr" }}>
         {projects.map((project, i) => (
-          <div key={i} id="project" className={classes.project}>
+          <div key={i} id={`project_${i}`} className={classes.project}>
             <h4
               style={{
                 display: "inline-block",
