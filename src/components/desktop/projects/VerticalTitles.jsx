@@ -3,7 +3,6 @@ import verticalScrollAnimation from "../../../animations/verticalScrollAnimation
 import {
   animation_1,
   animation_2,
-  animation_3,
 } from "../../../animations/projectImageAnimation";
 import projects from "../../../data_files/projects";
 import classes from "../../../styles/desktop/projects.module.scss";
@@ -61,6 +60,7 @@ const VerticalTitles = ({
           <div key={i} id="project" className={classes.project}>
             <h4
               style={{
+                display: "inline-block",
                 transform:
                   titlesOnHover[i] && titlesOnShow[i]
                     ? "translateX(1.5vw) scale(1.2)"
@@ -91,9 +91,7 @@ const VerticalTitles = ({
                     setIsDuringAnimation(false);
                   }, 2200);
 
-                  [animation_1, animation_2, animation_3][
-                    Math.floor(Math.random() * 3)
-                  ].restart();
+                  (i % 2 === 0 ? animation_1 : animation_2).restart();
 
                   setTimeout(() => {
                     setPrimaryImage(project.primaryImage);

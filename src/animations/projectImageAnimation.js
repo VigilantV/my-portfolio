@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 
-let animation_1, animation_2, animation_3;
+let animation_1, animation_2;
 
 const projectImageAnimation = (animationRef) => {
   const images = ["#primary_image", "#secondary_image"];
@@ -33,15 +33,6 @@ const projectImageAnimation = (animationRef) => {
         },
         "<"
       );
-
-    animation_3 = gsap.to(images, {
-      rotateX: -360,
-      rotateY: -360,
-      rotateZ: 360,
-      stagger: 0.3,
-      ease: "power2.out",
-      duration: 2,
-    });
   }, animationRef);
 
   return ctx;
@@ -49,4 +40,4 @@ const projectImageAnimation = (animationRef) => {
 
 export default projectImageAnimation;
 
-export { animation_1, animation_2, animation_3 };
+export { animation_1, animation_2 };
