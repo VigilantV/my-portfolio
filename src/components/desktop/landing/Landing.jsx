@@ -30,7 +30,7 @@ const Landing = ({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       window.scrollTo({ top: 0 });
-    }, 100);
+    }, 200);
 
     const handleUserInteraction = (e) => {
       if (!animationTriggeredRef.current) {
