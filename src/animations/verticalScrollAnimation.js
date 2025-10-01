@@ -9,6 +9,11 @@ const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
     const projectSection = document.getElementById("vertical_titles");
     const projects = document.querySelectorAll("#project");
 
+    const updateTitleVisibility = (index, visible) => (prev) => ({
+      ...prev,
+      [index]: visible,
+    });
+
     const scrolling = {
       enabled: true,
       events: "scroll,wheel,touchmove,pointermove".split(","),
@@ -52,14 +57,10 @@ const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
       ScrollTrigger.create({
         scroller: "#vertical_titles",
         trigger: project,
-        start: `top top+=${(6 * window.innerWidth) / 100 - 2}`,
-        end: "bottom top+=2",
-        onEnter: () => {
-          goToSection(project);
-        },
-        onEnterBack: () => {
-          goToSection(project);
-        },
+        start: "top top+=10",
+        end: "bottom top+=10",
+        onEnter: () => goToSection(project),
+        onEnterBack: () => goToSection(project),
       });
     });
 
@@ -75,30 +76,10 @@ const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
           start: `top bottom-=${(9 * window.innerWidth) / 100}`,
           end: `bottom top+=${(9 * window.innerWidth) / 100}`,
           toggleActions: "play reset play reverse",
-          onEnter: () => {
-            setTitlesOnShow((titleState) => ({
-              ...titleState,
-              [i]: true,
-            }));
-          },
-          onLeave: () => {
-            setTitlesOnShow((titleState) => ({
-              ...titleState,
-              [i]: false,
-            }));
-          },
-          onEnterBack: () => {
-            setTitlesOnShow((titleState) => ({
-              ...titleState,
-              [i]: true,
-            }));
-          },
-          onLeaveBack: () => {
-            setTitlesOnShow((titleState) => ({
-              ...titleState,
-              [i]: false,
-            }));
-          },
+          onEnter: () => setTitlesOnShow(updateTitleVisibility(i, true)),
+          onLeave: () => setTitlesOnShow(updateTitleVisibility(i, false)),
+          onEnterBack: () => setTitlesOnShow(updateTitleVisibility(i, true)),
+          onLeaveBack: () => setTitlesOnShow(updateTitleVisibility(i, false)),
         },
       });
     });
