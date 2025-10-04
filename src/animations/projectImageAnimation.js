@@ -8,7 +8,7 @@ const projectImageAnimation = (animationRef) => {
     animation_1 = gsap
       .timeline()
       .to(images, { x: "65vw", ease: "power4.out", duration: 0.5 })
-      .to(images, { x: 0, stagger: 0.3, ease: "elastic.inOut", duration: 1.7 });
+      .to(images, { x: 0, stagger: 0.3, ease: "elastic.inOut", duration: 1.6 });
 
     animation_2 = gsap
       .timeline()
