@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import verticalScrollAnimation from "../../../animations/verticalScrollAnimation";
 import {
   animation_1,
@@ -16,7 +16,9 @@ const VerticalTitles = ({
   setPrimaryImage,
   setSecondaryImage,
   setWebsiteUrl,
+  setGithubUrl,
   setIsDuringAnimation,
+  navigateToSection,
 }) => {
   const [titlesOnShow, setTitlesOnShow] = useState(
     new Array(projects.length).fill(false)
@@ -26,6 +28,7 @@ const VerticalTitles = ({
   );
 
   const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
+  const animationTimeoutRef = useRef(null);
 
   const projectsVerticalScrollHandler = () => {
     setCurrentWidth((prevValue) => {
@@ -43,11 +46,17 @@ const VerticalTitles = ({
   }, []);
 
   useEffect(() => {
-    const ctx = verticalScrollAnimation(projectsAnimationRef, setTitlesOnShow);
+    const ctx = verticalScrollAnimation(
+      projectsAnimationRef,
+      setTitlesOnShow,
+      navigateToSection
+    );
     return () => {
       ctx.revert();
+      if (animationTimeoutRef.current)
+        clearTimeout(animationTimeoutRef.current);
     };
-  }, [currentWidth]);
+  }, [currentWidth, navigateToSection]);
 
   return (
     <div
@@ -86,10 +95,13 @@ const VerticalTitles = ({
               }}
               onClick={() => {
                 if (titlesOnShow[i] && clickedBtnIndex !== i) {
+                  if (animationTimeoutRef.current)
+                    clearTimeout(animationTimeoutRef.current);
+
                   setIsDuringAnimation(true);
-                  setTimeout(() => {
+                  animationTimeoutRef.current = setTimeout(() => {
                     setIsDuringAnimation(false);
-                  }, 2200);
+                  }, 2000);
 
                   (i % 2 === 0 ? animation_1 : animation_2).restart();
 
@@ -97,6 +109,7 @@ const VerticalTitles = ({
                     setPrimaryImage(project.primaryImage);
                     setSecondaryImage(project.secondaryImage);
                     setWebsiteUrl(project.url);
+                    setGithubUrl(project.github);
                   }, 500);
                   if (clickedBtnIndex === -1) {
                     setTimeout(() => {

@@ -3,13 +3,14 @@ import VerticalTitles from "./VerticalTitles";
 import ProjectsImages from "./ProjectsImages";
 import classes from "../../../styles/desktop/projects.module.scss";
 
-const Projects = ({ currentSectionIndex }) => {
+const Projects = ({ currentSectionIndex, navigateToSection }) => {
   const [clickedBtnIndex, setClickedBtnIndex] = useState(-1);
   const [titleAnimated, setTitleAnimated] = useState(false);
 
   const [primaryImage, setPrimaryImage] = useState(null);
   const [secondaryImage, setSecondaryImage] = useState(null);
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [githubUrl, setGithubUrl] = useState("");
   const [isDuringAnimation, setIsDuringAnimation] = useState(false);
 
   const projectsAnimationRef = useRef(null);
@@ -50,7 +51,9 @@ const Projects = ({ currentSectionIndex }) => {
           setPrimaryImage={setPrimaryImage}
           setSecondaryImage={setSecondaryImage}
           setWebsiteUrl={setWebsiteUrl}
+          setGithubUrl={setGithubUrl}
           setIsDuringAnimation={setIsDuringAnimation}
+          navigateToSection={navigateToSection}
         />
         <ProjectsImages
           projectsAnimationRef={projectsAnimationRef}
@@ -58,6 +61,7 @@ const Projects = ({ currentSectionIndex }) => {
           primaryImage={primaryImage}
           secondaryImage={secondaryImage}
           websiteUrl={websiteUrl}
+          githubUrl={githubUrl}
           isDuringAnimation={isDuringAnimation}
         />
       </div>

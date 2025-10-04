@@ -32,7 +32,10 @@ const Portfolio = () => {
         currentSectionIndex={currentSectionIndex}
         onNavigationEnabled={setIsNavigationEnabled}
       />
-      <Projects currentSectionIndex={currentSectionIndex} />
+      <Projects
+        currentSectionIndex={currentSectionIndex}
+        navigateToSection={navigateToSection}
+      />
       <Contact currentSectionIndex={currentSectionIndex} />
     </>
   );

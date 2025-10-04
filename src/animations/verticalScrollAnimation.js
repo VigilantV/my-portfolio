@@ -7,7 +7,11 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const PROJECT_IDS = projects.map((_, index) => `project_${index}`);
 
-const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
+const verticalScrollAnimation = (
+  animationRef,
+  setTitlesOnShow,
+  navigateToSection
+) => {
   const ctx = gsap.context(() => {
     const projectsSection = document.getElementById("vertical_titles");
     const projectElements = PROJECT_IDS.map((id) =>
@@ -21,110 +25,53 @@ const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
 
     let currentProjectIndex = 0;
     let isNavigating = false;
-    let accumulatedScrollDelta = 0;
+    const navigateTitles = (targetIndex) => {
+      if (isNavigating) return;
 
-    const getValidProjectIndex = (index) => {
-      return Math.max(0, Math.min(PROJECT_IDS.length - 1, Math.round(index)));
-    };
-
-    const navigateToProject = (
-      targetIndex,
-      skipScroll = false,
-      showImages = false
-    ) => {
-      const validIndex = getValidProjectIndex(targetIndex);
-
-      if (validIndex === currentProjectIndex || isNavigating) {
+      if (targetIndex < 0) {
+        navigateToSection(0);
+        return;
+      } else if (targetIndex > PROJECT_IDS.length - 1 - 4) {
+        navigateToSection(2);
         return;
       }
 
       isNavigating = true;
-      const previousIndex = currentProjectIndex;
-      currentProjectIndex = validIndex;
+      currentProjectIndex = targetIndex;
 
-      // Update title visibility
-      setTitlesOnShow(updateTitleVisibility(previousIndex, false));
-      setTitlesOnShow(updateTitleVisibility(validIndex, true));
-
-      // For scrolling navigation, scroll to show the title
-      if (!skipScroll) {
-        // Kill existing animations
-        gsap.killTweensOf(projectsSection, "scrollTo");
-
-        // Scroll to show the current title
-        gsap.to(projectsSection, {
-          duration: 0.3,
-          scrollTo: { y: `#${PROJECT_IDS[validIndex]}`, offsetY: 0 },
-          ease: "power2.out",
-          onComplete: () => {
-            isNavigating = false;
-          },
-          onInterrupt: () => {
-            isNavigating = false;
-          },
-        });
-      } else {
-        // For click navigation
-        if (showImages) {
-          setIsDuringAnimation(true);
-          setTimeout(() => {
-            setIsDuringAnimation(false);
-          }, 2200);
-
-          setTimeout(() => {
-            const project = projects[validIndex];
-            setPrimaryImage(project.primaryImage);
-            setSecondaryImage(project.secondaryImage);
-            setWebsiteUrl(project.url);
-          }, 500);
-
-          if (clickedBtnIndex === -1) {
-            setTimeout(() => {
-              setClickedBtnIndex(validIndex);
-            }, 500);
-          } else {
-            setClickedBtnIndex(validIndex);
+      // Update ScrollTrigger start/end positions based on new currentProjectIndex
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.scroller === "#vertical_titles") {
+          const triggerIndex = projectElements.findIndex(
+            (el) => el === trigger.vars.trigger
+          );
+          if (triggerIndex !== -1) {
+            trigger.vars.start = `top bottom-=${
+              ((currentProjectIndex === 0 ? 12 : 9) * window.innerWidth) / 100
+            }`;
+            trigger.vars.end = `bottom top+=${
+              ((currentProjectIndex === 0 ? 0 : 9) * window.innerWidth) / 100
+            }`;
+            trigger.refresh();
           }
         }
-        isNavigating = false;
-      }
+      });
+
+      gsap.killTweensOf(projectsSection, "scrollTo");
+
+      gsap.to(projectsSection, {
+        duration: 0.3,
+        scrollTo: { y: `#${PROJECT_IDS[targetIndex]}` },
+        ease: "power2.out",
+        onComplete: () => (isNavigating = false),
+      });
     };
 
-    // Wheel navigation handler
     const handleWheel = (e) => {
-      if (isNavigating) {
-        e.preventDefault();
-        return;
-      }
-
-      // Only handle wheel events within the vertical titles area
-      const isInVerticalTitles = e.target.closest("#vertical_titles");
-      if (!isInVerticalTitles) return;
-
-      accumulatedScrollDelta += e.deltaY;
-
-      if (Math.abs(accumulatedScrollDelta) >= 30) {
-        // Lower threshold for more responsive navigation
-        const direction = accumulatedScrollDelta > 0 ? 1 : -1;
-        const newIndex = getValidProjectIndex(currentProjectIndex + direction);
-
-        if (newIndex !== currentProjectIndex) {
-          e.preventDefault();
-          accumulatedScrollDelta = 0;
-          navigateToProject(newIndex); // default: skipScroll=false, showImages=false
-        } else {
-          accumulatedScrollDelta = 0;
-        }
-      }
+      const direction = e.deltaY > 0 ? 1 : -1;
+      navigateTitles(currentProjectIndex + direction);
     };
 
-    // Set up event listeners
-    projectsSection.addEventListener("wheel", handleWheel, { passive: false });
-
-    // Initial setup - show first project
-    setTitlesOnShow(updateTitleVisibility(0, true));
-
-    // Set up ScrollTrigger for initial visibility animations only
     projectElements.forEach((project, i) => {
       gsap.to(project, {
         opacity: 1,
@@ -134,8 +81,12 @@ const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
         scrollTrigger: {
           scroller: "#vertical_titles",
           trigger: project,
-          start: `top bottom-=${(9 * window.innerWidth) / 100}`,
-          end: `bottom top+=${(9 * window.innerWidth) / 100}`,
+          start: `top bottom-=${
+            ((currentProjectIndex === 0 ? 12 : 9) * window.innerWidth) / 100
+          }`,
+          end: `bottom top+=${
+            ((currentProjectIndex === 0 ? 0 : 9) * window.innerWidth) / 100
+          }`,
           toggleActions: "play reset play reverse",
           onEnter: () => setTitlesOnShow(updateTitleVisibility(i, true)),
           onLeave: () => setTitlesOnShow(updateTitleVisibility(i, false)),
@@ -145,7 +96,8 @@ const verticalScrollAnimation = (animationRef, setTitlesOnShow) => {
       });
     });
 
-    // Return cleanup function from gsap.context
+    projectsSection.addEventListener("wheel", handleWheel, { passive: false });
+
     return () => {
       projectsSection.removeEventListener("wheel", handleWheel);
     };

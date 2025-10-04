@@ -7,53 +7,52 @@ import proj_3_secondary from "../images/projects/proj_3_secondary.jpg";
 
 const projects = [
   {
-    title: "",
-    period: "",
-    primaryImage: "",
-    secondaryImage: "",
-    url: "",
-  },
-  {
     title: "Delta System",
     period: "[June 2022 - September 2022]",
     primaryImage: proj_1_primary,
     secondaryImage: proj_1_secondary,
     url: "https://delta-system.co/",
+    github: "",
   },
   {
     title: "Online Institute",
-    period: "",
+    period: "[June 2022 - September 2022]",
     primaryImage: comingSoon1,
     secondaryImage: comingSoon2,
     url: "",
+    github: "",
   },
   {
-    title: "Construction Company",
+    title: "Construction Co.",
     period: "[April 2023 - August 2023]",
     primaryImage: proj_3_primary,
     secondaryImage: proj_3_secondary,
     url: "https://vigilantv.github.io/construction-company/",
+    github: "https://dunks1980.com/",
   },
   {
     title: "SiteScan",
-    period: "",
+    period: "[June 2022 - September 2022]",
     primaryImage: comingSoon1,
     secondaryImage: comingSoon2,
     url: "",
+    github: "",
   },
   {
     title: "Audit Platform",
-    period: "",
+    period: "[June 2022 - September 2022]",
     primaryImage: comingSoon1,
     secondaryImage: comingSoon2,
     url: "",
+    github: "",
   },
   {
     title: "Algo Website",
-    period: "",
+    period: "[June 2022 - September 2022]",
     primaryImage: comingSoon1,
     secondaryImage: comingSoon2,
     url: "",
+    github: "http://localhost:5178/portfolio",
   },
   {
     title: "",
@@ -61,6 +60,7 @@ const projects = [
     primaryImage: "",
     secondaryImage: "",
     url: "",
+    github: "",
   },
 ];
 
