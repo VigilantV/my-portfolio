@@ -5,6 +5,7 @@ import IsTyping from "./IsTypingText";
 import MyResumeTextBox from "./MyResumeTextBox";
 import headerRevealAnimation from "../../../animations/headerRevealAnimation";
 import dashAnimation from "../../../animations/dashAnimation";
+import { useGsapAnimation, useEventListeners } from "../../../hooks";
 import classes from "../../../styles/desktop/landing.module.scss";
 import innerRotating from "../../../images/inner_rotating.png";
 import outerRotating from "../../../images/outer_rotating.png";
@@ -32,26 +33,24 @@ const Landing = ({
       window.scrollTo({ top: 0 });
     }, 200);
 
-    const handleUserInteraction = (e) => {
-      if (!animationTriggeredRef.current) {
-        animationTriggeredRef.current = true;
-        setShowScrollAnimation(true);
-      }
-    };
-
-    const handleKeyDown = (e) => {
-      if (e.key === "ArrowDown") handleUserInteraction(e);
-    };
-
-    window.addEventListener("wheel", handleUserInteraction);
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener("wheel", handleUserInteraction);
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => clearTimeout(timeoutId);
   }, []);
+
+  const handleUserInteraction = (e) => {
+    if (!animationTriggeredRef.current) {
+      animationTriggeredRef.current = true;
+      setShowScrollAnimation(true);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") handleUserInteraction(e);
+  };
+
+  useEventListeners([
+    { target: window, event: "wheel", handler: handleUserInteraction },
+    { target: window, event: "keydown", handler: handleKeyDown },
+  ]);
 
   useEffect(() => {
     if (currentSectionIndex > 0 && !hasVisitedAnotherSection) {
@@ -69,17 +68,11 @@ const Landing = ({
     }
   }, [currentSectionIndex, hasVisitedAnotherSection, showIsTyping]);
 
-  useEffect(() => {
-    const ctx = headerRevealAnimation(landingAnimationRef);
-    return () => {
-      ctx.revert();
-    };
-  }, []);
+  useGsapAnimation(() => headerRevealAnimation(landingAnimationRef));
 
-  useEffect(() => {
+  useGsapAnimation(() => {
     if (showScrollAnimation) {
-      const ctx = dashAnimation(landingAnimationRef);
-      return () => ctx.revert();
+      return dashAnimation(landingAnimationRef);
     }
   }, [showScrollAnimation]);
 

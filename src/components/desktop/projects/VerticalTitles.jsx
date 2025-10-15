@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import verticalScrollAnimation from "../../../animations/verticalScrollAnimation";
+import { useGsapAnimation, useEventListeners } from "../../../hooks";
 import {
   animation_1,
   animation_2,
@@ -38,25 +39,19 @@ const VerticalTitles = ({
     });
   };
 
-  useEffect(() => {
-    window.addEventListener("resize", projectsVerticalScrollHandler);
-    return () => {
-      window.removeEventListener("resize", projectsVerticalScrollHandler);
-    };
-  }, []);
+  useEventListeners([
+    { target: window, event: "resize", handler: projectsVerticalScrollHandler },
+  ]);
 
-  useEffect(() => {
-    const ctx = verticalScrollAnimation(
-      projectsAnimationRef,
-      setTitlesOnShow,
-      navigateToSection
-    );
-    return () => {
-      ctx.revert();
-      if (animationTimeoutRef.current)
-        clearTimeout(animationTimeoutRef.current);
-    };
-  }, [currentWidth, navigateToSection]);
+  useGsapAnimation(
+    () =>
+      verticalScrollAnimation(
+        projectsAnimationRef,
+        setTitlesOnShow,
+        navigateToSection
+      ),
+    [currentWidth, navigateToSection]
+  );
 
   return (
     <div

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import resumeTextBoxAnimation from "../../../animations/resumeTextBoxAnimation";
-import downloadFile from "../../common/downloadFile";
+import { useGsapAnimation } from "../../../hooks";
+import { downloadFile } from "../../common";
 import classes from "../../../styles/desktop/landing.module.scss";
 
 const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
@@ -12,10 +13,9 @@ const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
     }
   }, [flameDelay]);
 
-  useEffect(() => {
+  useGsapAnimation(() => {
     if (showMyResume) {
-      const ctx = resumeTextBoxAnimation(landingAnimationRef);
-      return () => ctx.revert();
+      return resumeTextBoxAnimation(landingAnimationRef);
     }
   }, [showMyResume]);
 

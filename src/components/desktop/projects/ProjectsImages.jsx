@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import projectImageAnimation from "../../../animations/projectImageAnimation";
+import { useGsapAnimation } from "../../../hooks";
 import COLORS from "../../../styles/theme";
 import classes from "../../../styles/desktop/projects.module.scss";
 import globeIcon from "../../../images/icons/globe.png";
@@ -16,12 +17,7 @@ const ProjectsImages = ({
 }) => {
   const [onHoverLayer, setOnHoverLayer] = useState(false);
 
-  useEffect(() => {
-    const ctx = projectImageAnimation(projectsAnimationRef);
-    return () => {
-      ctx.revert();
-    };
-  }, []);
+  useGsapAnimation(() => projectImageAnimation(projectsAnimationRef));
 
   return (
     <div className={classes.project_images}>

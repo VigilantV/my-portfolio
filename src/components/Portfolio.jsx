@@ -2,11 +2,10 @@ import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import animation from "../animations/computerAnimation.json";
-import useDeviceBreakpoints from "../hooks/useDeviceBreakpoints";
+import { useDeviceBreakpoints, useSectionNavigation } from "../hooks";
 import Landing from "./desktop/landing/Landing";
 import Projects from "./desktop/projects/Projects";
 import Contact from "./desktop/contact/Contact";
-import useSectionNavigation from "../hooks/useSectionNavigation";
 
 const Portfolio = () => {
   const { isMidDesk } = useDeviceBreakpoints();

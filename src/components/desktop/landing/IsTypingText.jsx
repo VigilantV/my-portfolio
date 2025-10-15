@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import isTypingAnimation from "../../../animations/isTypingAnimation";
+import { useGsapAnimation } from "../../../hooks";
 import classes from "../../../styles/desktop/landing.module.scss";
 import clickSoundSrc from "../../../assests/keyboard_click.mp3";
 
@@ -97,10 +98,9 @@ const IsTyping = ({ showScrollAnimation, landingAnimationRef }) => {
     }
   }, [showScrollAnimation]);
 
-  useEffect(() => {
+  useGsapAnimation(() => {
     if (isTypingStart) {
-      const ctx = isTypingAnimation(textId, landingAnimationRef);
-      return () => ctx.revert();
+      return isTypingAnimation(textId, landingAnimationRef);
     }
   }, [textId, isTypingStart]);
 
