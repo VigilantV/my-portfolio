@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import VerticalTitles from "./VerticalTitles";
 import ProjectsImages from "./ProjectsImages";
-import { TitleSvg } from "../../common";
+import TitleSvg from "../../common/TitleSvg";
 import classes from "../../../styles/desktop/projects.module.scss";
 
 const Projects = ({ currentSectionIndex, navigateToSection }) => {
@@ -36,6 +36,8 @@ const Projects = ({ currentSectionIndex, navigateToSection }) => {
           width="21vw"
           viewBox="-1 10 252 45"
           titleAnimated={titleAnimated}
+          pathClassName={classes.title_path}
+          animateClassName={classes.animate}
         />
       </div>
       <div className={classes.projects}>
