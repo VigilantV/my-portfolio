@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import verticalScrollAnimation from "../../../animations/verticalScrollAnimation";
-import { useGsapAnimation, useEventListeners } from "../../../hooks";
+import useGsapAnimation from "../../../hooks/useGsapAnimation";
+import useEventListeners from "../../../hooks/useEventListeners";
 import {
   animation_1,
   animation_2,

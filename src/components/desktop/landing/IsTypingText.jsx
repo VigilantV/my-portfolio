@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import isTypingAnimation from "../../../animations/isTypingAnimation";
-import { useGsapAnimation } from "../../../hooks";
+import useGsapAnimation from "../../../hooks/useGsapAnimation";
 import classes from "../../../styles/desktop/landing.module.scss";
 import clickSoundSrc from "../../../assests/keyboard_click.mp3";
 

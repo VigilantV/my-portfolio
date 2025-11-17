@@ -1,6 +1,6 @@
 import { useState } from "react";
 import projectImageAnimation from "../../../animations/projectImageAnimation";
-import { useGsapAnimation } from "../../../hooks";
+import useGsapAnimation from "../../../hooks/useGsapAnimation";
 import COLORS from "../../../styles/theme";
 import classes from "../../../styles/desktop/projects.module.scss";
 import globeIcon from "../../../images/icons/globe.png";

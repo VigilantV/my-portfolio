@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import TextFieldTemplate from "./TextFieldTemplate";
 import textShiveringAnimation from "../../../animations/textShiveringAnimation";
-import { useGsapAnimation } from "../../../hooks";
+import useGsapAnimation from "../../../hooks/useGsapAnimation";
 import downloadFile from "../../common/downloadFile";
 import TitleSvg from "../../common/TitleSvg";
 import sendEmail from "./sendEmail";

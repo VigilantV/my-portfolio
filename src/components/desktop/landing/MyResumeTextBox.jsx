@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import resumeTextBoxAnimation from "../../../animations/resumeTextBoxAnimation";
-import { useGsapAnimation } from "../../../hooks";
+import useGsapAnimation from "../../../hooks/useGsapAnimation";
 import downloadFile from "../../common/downloadFile";
 import classes from "../../../styles/desktop/landing.module.scss";
 
