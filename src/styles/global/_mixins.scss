@@ -128,3 +128,30 @@
     }
   }
 }
+
+@mixin title-svg-path() {
+  stroke-width: 1.4;
+  stroke-dasharray: 1300;
+  stroke-dashoffset: 1300;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: $darkBlue;
+  fill: transparent;
+}
+
+@mixin title-svg-path-animate($draw-duration: 20s, $fill-delay: 3.5s) {
+  animation: draw-svg-title $draw-duration linear forwards,
+    fill-svg-title 0.7s ease-in-out $fill-delay forwards;
+}
+
+@keyframes draw-svg-title {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill-svg-title {
+  to {
+    fill: $darkBlue;
+  }
+}

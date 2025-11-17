@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import resumeTextBoxAnimation from "../../../animations/resumeTextBoxAnimation";
 import { useGsapAnimation } from "../../../hooks";
-import { downloadFile } from "../../common";
+import downloadFile from "../../common/downloadFile";
 import classes from "../../../styles/desktop/landing.module.scss";
 
 const MyResumeTextBox = ({ flameDelay, landingAnimationRef }) => {
