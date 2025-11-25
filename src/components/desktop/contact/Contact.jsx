@@ -95,7 +95,7 @@ const Contact = ({ currentSectionIndex }) => {
               width: "7vw",
               height: "2.6vw",
               fontSize: "1.25vw",
-              fontFamily: "calibri",
+              fontFamily: "calibri, roboto, arial, sans-serif",
               whiteSpace: "nowrap",
               marginRight: "2vw",
               color: COLORS.whitish,
