@@ -132,8 +132,7 @@
 
 .resume_box {
   position: absolute;
-  top: -10vw;
-  left: 37vw;
+  left: 33.5vw;
 
   div {
     width: 12vw;
@@ -194,9 +193,9 @@
 
 @include keyframes(float) {
   0% {
-    top: -10.8vw;
+    top: -12.2vw;
   }
   100% {
-    top: -10.1vw;
+    top: -11.5vw;
   }
 }

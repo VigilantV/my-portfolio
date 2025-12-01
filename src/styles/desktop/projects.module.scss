@@ -49,7 +49,7 @@
   flex-direction: column;
   align-items: end;
   height: 30vw;
-  width: 27vw;
+  width: 20vw;
   padding-left: 1vw;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -80,10 +80,10 @@
 
 .primary_image {
   position: absolute;
-  top: -1vw;
-  left: 10vw;
-  width: 45vw;
-  height: 26vw;
+  top: 0;
+  left: 11vw;
+  width: 44vw;
+  height: 25vw;
   border-radius: 0.7vw;
 }
 
@@ -92,17 +92,17 @@
   top: 16vw;
   left: -2vw;
   width: 22vw;
-  height: 13vw;
+  height: 12.5vw;
   border-radius: 0.7vw;
   z-index: 5;
 }
 
 .layer_1 {
   position: absolute;
-  top: -1vw;
-  left: 10vw;
-  width: 45vw;
-  height: 26vw;
+  top: 0;
+  left: 11vw;
+  width: 44vw;
+  height: 25vw;
   border-radius: 0.7vw;
   transition: 0.5s;
 }
@@ -114,12 +114,20 @@
   @include underline();
 }
 
+.link_text {
+  color: $lightRouge;
+  font-size: 1.2vw;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .layer_2 {
   position: absolute;
   top: 16vw;
   left: -2vw;
   width: 22vw;
-  height: 13vw;
+  height: 12.5vw;
   border-radius: 0.7vw;
   transition: 0.5s;
   z-index: 5;
