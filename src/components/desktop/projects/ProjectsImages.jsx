@@ -16,6 +16,11 @@ const ProjectsImages = ({
   isDuringAnimation,
 }) => {
   const [onHoverLayer, setOnHoverLayer] = useState(false);
+  const hasWebsiteUrl = Boolean(websiteUrl?.trim());
+  const hasGithubUrl = Boolean(githubUrl?.trim());
+  const sharedIconStyle = {
+    opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
+  };
 
   useGsapAnimation(() => projectImageAnimation(projectsAnimationRef));
 
@@ -32,7 +37,7 @@ const ProjectsImages = ({
         decoding="async"
         className={classes.primary_image}
       />
-      {websiteUrl !== "" && (
+      {(hasWebsiteUrl || hasGithubUrl) && (
         <div
           style={{
             visibility: clickedBtnIndex === -1 ? "hidden" : "visible",
@@ -47,40 +52,56 @@ const ProjectsImages = ({
             setOnHoverLayer(false);
           }}
         >
-          <div
-            style={{
-              bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
-              left: "45%",
-            }}
-            className={classes.icon_container}
-          >
-            <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
-              <img
-                style={{
-                  opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
-                }}
-                src={globeIcon}
-                alt="website_url"
-              />
-            </a>
-          </div>
-          <div
-            style={{
-              bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
-              left: "55%",
-            }}
-            className={classes.icon_container}
-          >
-            <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-              <img
-                style={{
-                  opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
-                }}
-                src={githubIcon}
-                alt="github_url"
-              />
-            </a>
-          </div>
+          {hasWebsiteUrl && (
+            <div
+              style={{
+                bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
+                left: hasWebsiteUrl && !hasGithubUrl ? "50%" : "45%",
+                transform:
+                  hasWebsiteUrl && !hasGithubUrl ? "translateX(-50%)" : "none",
+              }}
+              className={classes.icon_container}
+            >
+              <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
+                {hasWebsiteUrl && !hasGithubUrl ? (
+                  <span className={classes.link_text} style={sharedIconStyle}>
+                    Visit Website
+                  </span>
+                ) : (
+                  <img
+                    style={sharedIconStyle}
+                    src={globeIcon}
+                    alt="website_url"
+                  />
+                )}
+              </a>
+            </div>
+          )}
+          {hasGithubUrl && (
+            <div
+              style={{
+                bottom: onHoverLayer && !isDuringAnimation ? "50%" : 0,
+                left: hasGithubUrl && !hasWebsiteUrl ? "50%" : "55%",
+                transform:
+                  hasGithubUrl && !hasWebsiteUrl ? "translateX(-50%)" : "none",
+              }}
+              className={classes.icon_container}
+            >
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                {hasGithubUrl && !hasWebsiteUrl ? (
+                  <span className={classes.link_text} style={sharedIconStyle}>
+                    Visit Github
+                  </span>
+                ) : (
+                  <img
+                    style={sharedIconStyle}
+                    src={githubIcon}
+                    alt="github_url"
+                  />
+                )}
+              </a>
+            </div>
+          )}
         </div>
       )}
       <img
@@ -94,7 +115,7 @@ const ProjectsImages = ({
         decoding="async"
         className={classes.secondary_image}
       />
-      {websiteUrl !== "" && (
+      {(hasWebsiteUrl || hasGithubUrl) && (
         <div
           style={{
             visibility: clickedBtnIndex === -1 ? "hidden" : "visible",

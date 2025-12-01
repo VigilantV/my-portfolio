@@ -74,6 +74,7 @@ const Contact = ({ currentSectionIndex }) => {
         <form
           ref={formRef}
           className={classes.input_section}
+          autoComplete="off"
           onSubmit={(e) => sendEmail(e, formRef)}
         >
           <p className={classes.question}>
@@ -85,6 +86,7 @@ const Contact = ({ currentSectionIndex }) => {
             name="message"
             placeholder="Message"
             required
+            autoComplete="off"
             className={classes.text_area}
           />
           <Button

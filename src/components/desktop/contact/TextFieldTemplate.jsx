@@ -7,6 +7,7 @@ const TextFieldTemplate = ({ label, name, type }) => {
       label={label}
       name={name}
       type={type}
+      autoComplete="off"
       variant="standard"
       required
       sx={{
