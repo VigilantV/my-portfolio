@@ -5,6 +5,7 @@ import COLORS from "../../../styles/theme";
 import classes from "../../../styles/desktop/projects.module.scss";
 import globeIcon from "../../../images/icons/globe.png";
 import githubIcon from "../../../images/icons/github_rouge.png";
+import npmIcon from "../../../images/icons/npm2.png";
 
 const ProjectsImages = ({
   projectsAnimationRef,
@@ -18,6 +19,10 @@ const ProjectsImages = ({
   const [onHoverLayer, setOnHoverLayer] = useState(false);
   const hasWebsiteUrl = Boolean(websiteUrl?.trim());
   const hasGithubUrl = Boolean(githubUrl?.trim());
+  const isNpmLink =
+    hasWebsiteUrl &&
+    typeof websiteUrl === "string" &&
+    websiteUrl.toLowerCase().includes("npmjs");
   const sharedIconStyle = {
     opacity: onHoverLayer && !isDuringAnimation ? 1 : 0,
   };
@@ -69,8 +74,11 @@ const ProjectsImages = ({
                   </span>
                 ) : (
                   <img
-                    style={sharedIconStyle}
-                    src={globeIcon}
+                    style={{
+                      ...sharedIconStyle,
+                      transform: isNpmLink ? "scale(1.3)" : "none",
+                    }}
+                    src={isNpmLink ? npmIcon : globeIcon}
                     alt="website_url"
                   />
                 )}
