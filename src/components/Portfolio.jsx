@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import animation from "../animations/computerAnimation.json";
@@ -7,13 +7,28 @@ import useSectionNavigation from "../hooks/useSectionNavigation";
 import Landing from "./desktop/landing/Landing";
 import Projects from "./desktop/projects/Projects";
 import Contact from "./desktop/contact/Contact";
+import MobilePortfolio from "./mobile/MobilePortfolio";
 
 const Portfolio = () => {
-  const { isMidDesk } = useDeviceBreakpoints();
+  const { isMidDesk, isTablet, isMobile } = useDeviceBreakpoints();
   const [isNavigationEnabled, setIsNavigationEnabled] = useState(false);
 
   const { currentSectionIndex, navigateToSection } =
     useSectionNavigation(isNavigationEnabled);
+
+  useLayoutEffect(() => {
+    if (typeof document === "undefined") return undefined;
+    const previousOverflow = document.body.style.overflowY;
+    document.body.style.overflowY = isTablet || isMobile ? "auto" : "hidden";
+
+    return () => {
+      document.body.style.overflowY = previousOverflow;
+    };
+  }, [isTablet, isMobile]);
+
+  if (isTablet || isMobile) {
+    return <MobilePortfolio />;
+  }
 
   return isMidDesk ? (
     <div>

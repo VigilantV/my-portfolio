@@ -1,0 +1,109 @@
+@use "../global/variables" as *;
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  color: rgba($darkBlue, 0.55);
+}
+
+.title {
+  font-size: clamp(1.5rem, 8vw, 2rem);
+  color: $darkBlue;
+}
+
+.copy {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba($darkBlue, 0.8);
+}
+
+.card_stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba($darkBlue, 0.05);
+  box-shadow: 0 1.5rem 3rem rgba($darkBlue, 0.08);
+  background: rgba($whitish, 0.95);
+}
+
+.card_media {
+  position: relative;
+  padding-top: 56%;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.card_body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.2rem 1.4rem 1.5rem;
+
+  h3 {
+    font-size: 1.25rem;
+    color: $darkBlue;
+  }
+}
+
+.period {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba($darkBlue, 0.55);
+}
+
+.links {
+  display: flex;
+  gap: 0.75rem;
+
+  a {
+    flex: 1;
+    text-align: center;
+    padding: 0.65rem 0.75rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba($darkBlue, 0.15);
+    color: $darkBlue;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: rgba($darkBlue, 0.05);
+    }
+  }
+
+  a:first-child {
+    border-color: rgba($lightRouge, 0.3);
+    color: $lightRouge;
+  }
+}
+
+
+

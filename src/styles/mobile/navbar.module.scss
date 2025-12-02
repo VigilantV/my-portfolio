@@ -1,0 +1,49 @@
+@use "../global/variables" as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  backdrop-filter: blur(18px);
+  background: rgba($whitish, 0.85);
+  border-bottom: 1px solid rgba($darkBlue, 0.08);
+  box-shadow: 0 0.35rem 1.2rem rgba($darkBlue, 0.08);
+  z-index: 10;
+}
+
+.brand {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 600;
+  color: $darkBlue;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.link {
+  border: none;
+  background: transparent;
+  font-size: clamp(0.85rem, 3.6vw, 1rem);
+  font-weight: 500;
+  color: rgba($darkBlue, 0.75);
+  padding: 0.25rem 0.35rem;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.link_active {
+  color: $lightRouge;
+  background-color: rgba($lightRouge, 0.08);
+}
+
+
+

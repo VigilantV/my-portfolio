@@ -1,0 +1,21 @@
+@use "../global/variables" as *;
+
+.wrapper {
+  min-height: 100vh;
+  background-color: $whitish;
+  color: $darkBlue;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 5.5rem 1.25rem 3rem;
+}
+
+.section {
+  scroll-margin-top: 5rem;
+}
+
+
+

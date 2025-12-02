@@ -1,0 +1,126 @@
+@use "../global/variables" as *;
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  h2 {
+    font-size: clamp(1.6rem, 8vw, 2.1rem);
+    color: $darkBlue;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba($darkBlue, 0.8);
+  }
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.78rem;
+  color: rgba($darkBlue, 0.6);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba($whitish, 0.9);
+  border: 1px solid rgba($darkBlue, 0.08);
+  box-shadow: 0 1.5rem 3rem rgba($darkBlue, 0.08);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba($darkBlue, 0.65);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid rgba($darkBlue, 0.12);
+    border-radius: 0.9rem;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    background-color: rgba($whitish, 0.85);
+    color: $darkBlue;
+  }
+
+  textarea {
+    resize: none;
+    min-height: 6rem;
+  }
+
+  button {
+    margin-top: 0.5rem;
+    padding: 0.95rem;
+    border-radius: 0.95rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $whitish;
+    background: linear-gradient(135deg, $lightRouge, $rouge);
+    box-shadow: 0 1rem 2rem rgba($rouge, 0.2);
+  }
+}
+
+.info_panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  color: rgba($darkBlue, 0.8);
+}
+
+.resume_button {
+  align-self: flex-start;
+  padding: 0.8rem 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba($darkBlue, 0.2);
+  background: transparent;
+  font-weight: 600;
+  color: $darkBlue;
+}
+
+.socials {
+  display: flex;
+  gap: 0.8rem;
+
+  a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($darkBlue, 0.05);
+    display: grid;
+    place-items: center;
+  }
+
+  img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+
+
